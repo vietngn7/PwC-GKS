@@ -1,0 +1,8 @@
+
+.local
+.screenshots
+
+*.xlsx
+*.xls
+
+!GKS.xlsx
