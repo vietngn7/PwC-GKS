@@ -1,6 +1,5 @@
-
-GKS/.local
-GKS/.screenshots
+GKS/.local/
+GKS/.screenshots/
 
 *.xlsx
 *.xls

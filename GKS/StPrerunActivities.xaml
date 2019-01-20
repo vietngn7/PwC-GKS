@@ -1,4 +1,4 @@
-﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="Main_1"
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="StPrerunActivities"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
  xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
@@ -7,9 +7,16 @@
  xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
  xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
  xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
- xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
  xmlns:ui="http://schemas.uipath.com/workflow/activities"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="robotName" Type="InArgument(x:String)" />
+    <x:Property Name="configFilePath" Type="OutArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>StPrerunActivities_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -30,9 +37,9 @@
       <x:String>System.Net.Mail</x:String>
       <x:String>System.Xml</x:String>
       <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
-      <x:String>System.Windows.Markup</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -52,42 +59,36 @@
       <AssemblyReference>PresentationCore</AssemblyReference>
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
-      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_1">
-    <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="configFilePath" />
-      <Variable x:TypeArguments="sd:DataTable" Name="paramsDataTable" />
-    </Sequence.Variables>
-    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke StPrerunActivities workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="StPrerunActivities.xaml">
-      <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="robotName">ГКС/Федстат</InArgument>
-        <OutArgument x:TypeArguments="x:String" x:Key="configFilePath">[configFilePath]</OutArgument>
-      </ui:InvokeWorkflowFile.Arguments>
-    </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke StReadConfigFile workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="StReadConfigFile.xaml">
-      <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="configFilePath">[configFilePath]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="paramsTableName">InputData</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="paramsSheetName">Параметры</InArgument>
-        <OutArgument x:TypeArguments="sd:DataTable" x:Key="paramsDataTable">[paramsDataTable]</OutArgument>
-      </ui:InvokeWorkflowFile.Arguments>
-    </ui:InvokeWorkflowFile>
-    <sads:DebugSymbol.Symbol>dyBFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXE1haW4ueGFtbAs6A04OAgEBPwVEHQIBCkUFTB0CAQJCSEJYAgENQUJBTQIBDD+/AT/YAQIBC0dHR1cCAQhKTUpeAgEGSUhJUQIBBUhISFECAQRFvQFF1AECAQM=</sads:DebugSymbol.Symbol>
+  <Sequence DisplayName="StPrerunActivities" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <ui:MessageBox ChosenButton="{x:Null}" Buttons="Ok" Caption="[&quot;Робот-аудитор &quot; + robotName]" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="Перед началом работы Робота будут закрыты все файлы Excel и браузер MS Explorer. Пожалуйста, сохраните все изменения и затем нажмите на OK" TopMost="True" />
+    <ui:KillProcess ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process" sap2010:WorkflowViewState.IdRef="KillProcess_1" ProcessName="EXCEL" />
+    <ui:KillProcess ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process" sap2010:WorkflowViewState.IdRef="KillProcess_2" ProcessName="iexplore" />
+    <ui:MessageBox ChosenButton="{x:Null}" Buttons="Ok" Caption="[&quot;Робот-аудитор &quot; + robotName]" DisplayName="Message Box" Text="Выберите исходный файл конфигурации" TopMost="True" sap2010:WorkflowViewState.IdRef="MessageBox_2" />
+    <ui:SelectFile DisplayName="Select File" Filter="All files (*.*)|*.*" SelectedFile="[configFilePath]" sap2010:WorkflowViewState.IdRef="SelectFile_1" />
+    <sads:DebugSymbol.Symbol>dy5FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0UHJlcnVuQWN0aXZpdGllcy54YW1sDUUDTA4CAQFGBUbYAgIBDUcFR6QBAgELSAVIpwECAQlJBUnxAQIBBUoFSpwBAgECRkFGawIBD0a6AUbGAgIBDkeaAUehAQIBDEiaAUikAQIBCklBSWsCAQdJiwFJsAECAQZKWEpqAgED</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="InvokeWorkflowFile_1" sap:VirtualizedContainerService.HintSize="314.4,88" />
-      <sap2010:ViewStateData Id="InvokeWorkflowFile_2" sap:VirtualizedContainerService.HintSize="314.4,88" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="336.8,340.8">
+      <sap2010:ViewStateData Id="MessageBox_1" sap:VirtualizedContainerService.HintSize="314.4,60" />
+      <sap2010:ViewStateData Id="KillProcess_1" sap:VirtualizedContainerService.HintSize="314.4,22.4" />
+      <sap2010:ViewStateData Id="KillProcess_2" sap:VirtualizedContainerService.HintSize="314.4,22.4" />
+      <sap2010:ViewStateData Id="MessageBox_2" sap:VirtualizedContainerService.HintSize="314.4,60" />
+      <sap2010:ViewStateData Id="SelectFile_1" sap:VirtualizedContainerService.HintSize="314.4,22.4" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="336.8,472">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Main_1" sap:VirtualizedContainerService.HintSize="376.8,420.8" />
+      <sap2010:ViewStateData Id="StPrerunActivities_1" sap:VirtualizedContainerService.HintSize="376.8,592" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
