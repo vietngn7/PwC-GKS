@@ -11,7 +11,7 @@
  xmlns:ui="http://schemas.uipath.com/workflow/activities"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="dt" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="dt" Type="InOutArgument(sd:DataTable)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
@@ -68,7 +68,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="This sequence is to process each row and to invoke specific workflow for that row.&#xD;&#xA;&#xD;&#xA;INPUT   : DataTable from Excel&#xD;&#xA;OUTPUT: Updated DataTable with updated values&#xD;&#xA;" DisplayName="DataProccessingSeq" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="This sequence is to process each row and to invoke specific workflow for that row.&#xA;&#xA;INPUT   : DataTable dt&#xA;OUTPUT: Updated DataTable with updated values&#xD;&#xA;&#xD;&#xA;TODO:&#xD;&#xA;1. Подумать как реализовать проход по всем строкам.&#xA;2. Какие аргументы у workflow&#xD;&#xA;3. Как обновлять данные в табличке&#xD;&#xA;&#xD;&#xA;" DisplayName="DataProccessingSeq" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Пока тут явно передается только первый элемент" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="GKS.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="sd:DataRow" x:Key="row">[dt.Rows(0)]</InArgument>
@@ -79,7 +79,7 @@
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
       <sap2010:ViewStateData Id="InvokeWorkflowFile_1" sap:VirtualizedContainerService.HintSize="314,87" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="336,319">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="336,431">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -87,7 +87,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="DataProccessingSeq_1" sap:VirtualizedContainerService.HintSize="376,439" />
+      <sap2010:ViewStateData Id="DataProccessingSeq_1" sap:VirtualizedContainerService.HintSize="376,511" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

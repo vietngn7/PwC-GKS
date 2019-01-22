@@ -11,7 +11,7 @@
  xmlns:ui="http://schemas.uipath.com/workflow/activities"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="row" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="row" Type="InOutArgument(sd:DataRow)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
@@ -65,10 +65,9 @@
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="A sequence is to process data from an inputed row. It enters values to website GKS by using javascript code.&#xD;&#xA;&#xD;&#xA;INPUT   : DataTable row&#xD;&#xA;OUTPUT: Unknown yet&#xD;&#xA;&#xD;&#xA;Steps:&#xD;&#xA;1. Determine which of two websites of the GKS is to open. &#xD;&#xA;2. Assign a value to miss according to type of GKS.&#xD;&#xA;3. Open a brower and input all data from the row.&#xD;&#xA;   1) A &quot;currentIndex&quot; variable is created to retrieve value from the row.&#xD;&#xA;   2) Loop through 6 values of row (miss one of them according to type of GKS) and then input to the website using JS code.&#xD;&#xA;  3) Click &quot;Select all years&quot;&#xD;&#xA;  4) Click a button to show results.&#xD;&#xA;4. Somehow switch table and retrieve results." DisplayName="GKS" sap2010:WorkflowViewState.IdRef="Sequence_4">
+  <Sequence sap2010:Annotation.AnnotationText="A sequence is to process data from an inputed row. It enters values to website GKS by using javascript code.&#xA;&#xA;INPUT   : DataRow row&#xA;OUTPUT: Unknown yet&#xA;&#xD;&#xA;TODO: &#xD;&#xA;1. Убрать message box в браузере&#xD;&#xA;2. Вытащить данные из таблички&#xD;&#xA;3. Подумать над аргументами flow&#xD;&#xA;4. Как данные обновлять???&#xD;&#xA;&#xD;&#xA;&#xA;Steps:&#xA;1. Determine which of two websites of the GKS is to open. &#xA;2. Assign a value to miss according to type of GKS.&#xA;3. Open a brower and input all data from the row.&#xA;   1) A &quot;currentIndex&quot; variable is created to retrieve value from the row.&#xA;   2) Loop through 6 values of row (miss one of them according to type of GKS) and then input to the website using JS code.&#xA;  3) Click &quot;Select all years&quot;&#xA;  4) Click a button to show results.&#xA;4. Somehow switch table and retrieve results.&#xD;&#xA;&#xD;&#xA;" DisplayName="GKS" sap2010:WorkflowViewState.IdRef="Sequence_4">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="url" />
       <Variable x:TypeArguments="x:Int32" Name="toMiss" />
@@ -128,7 +127,7 @@
                 <If Condition="[currentIndex.Equals(toMiss)]" sap2010:WorkflowViewState.IdRef="If_1">
                   <If.Else>
                     <Sequence sap2010:WorkflowViewState.IdRef="Sequence_6">
-                      <Switch x:TypeArguments="x:Int32" sap2010:Annotation.AnnotationText="1 - Территория&#xD;&#xA;2 - Вид экономической деятельности&#xA;3 -Классификатор продукции&#xA;4 - Единицы измерения&#xA;5 - Каналы реализации&#xA;6 - Годы&#xA;7 - Периоды" DisplayName="Switch" Expression="[currentIndex]" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+                      <Switch x:TypeArguments="x:Int32" sap2010:Annotation.AnnotationText="1 - Территория&#xA;2 - Вид экономической деятельности&#xA;3 -Классификатор продукции&#xA;4 - Единицы измерения&#xA;5 - Каналы реализации&#xA;6 - Годы&#xA;7 - Периоды" DisplayName="Switch" Expression="[currentIndex]" sap2010:WorkflowViewState.IdRef="Switch`1_1">
                         <Assign x:Key="1" sap2010:WorkflowViewState.IdRef="Assign_2">
                           <Assign.To>
                             <OutArgument x:TypeArguments="x:String">[param]</OutArgument>
@@ -239,7 +238,7 @@
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
-    <sads:DebugSymbol.Symbol>dzBcXG1hY1xIb21lXERvd25sb2Fkc1xVaVBhdGhcUHdDLUdLU1xHS1NcR0tTLnhhbWw7RwPzAQ4CAQFMBVMOAgFMVAVpCgIBQGoF8QEWAgECUTBRQQIBT04xTjYCAU1UE1RLAgFBVgldEgIBSGAJZxICAURqwgFqyQECAT5wC+4BFgIBA1szWzQCAUtYNFg8AgFJZTNlNAIBR2I0YjwCAUV2DX0WAgE6fg3PARUCAQjQAQ3eARgCAQbfAQ3tARgCAQR7N3s4AgE9eDh4RgIBO38PzgEaAgELfm5+hQECAQncAaAB3AHOAQIBB+sBoAHrAcsBAgEFgAERxQEWAgERxgERzQEaAgEMgAEfgAE+AgESggEVwwEgAgEVywE7ywFNAgEPyAE8yAFKAgENgwEXvAEgAgEbvQEXvQHgAQIBGb4BF8IBKwIBFoMBqAKDAbgCAgEchAEZiwEiAgE2jAEZkwEiAgEylAEZmwEiAgEunAEZowEiAgEqpAEZqwEiAgEmrAEZswEiAgEitAEZuwEiAgEevQGsAb0BzgECARq+AegBvgHkAgIBGL4BowG+AdwBAgEXiQFEiQFJAgE5hgFFhgFMAgE3kQFEkQFJAgE1jgFFjgFMAgEzmQFEmQFIAgExlgFFlgFMAgEvoQFEoQFNAgEtngFFngFMAgErqQFEqQFHAgEppgFFpgFMAgEnsQFEsQFKAgElrgFFrgFMAgEjuQFEuQFJAgEhtgFFtgFMAgEf</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzBcXG1hY1xIb21lXERvd25sb2Fkc1xVaVBhdGhcUHdDLUdLU1xHS1NcR0tTLnhhbWw7RgPyAQ4CAQFLBVIOAgFMUwVoCgIBQGkF8AEWAgECUDBQQQIBT00xTTYCAU1TE1NLAgFBVQlcEgIBSF8JZhICAURpwgFpyQECAT5vC+0BFgIBA1ozWjQCAUtXNFc8AgFJZDNkNAIBR2E0YTwCAUV1DXwWAgE6fQ3OARUCAQjPAQ3dARgCAQbeAQ3sARgCAQR6N3o4AgE9dzh3RgIBO34PzQEaAgELfW59hQECAQnbAaAB2wHOAQIBB+oBoAHqAcsBAgEFfxHEARYCARHFARHMARoCAQx/H38+AgESgQEVwgEgAgEVygE7ygFNAgEPxwE8xwFKAgENggEXuwEgAgEbvAEXvAHgAQIBGb0BF8EBKwIBFoIBowKCAbMCAgEcgwEZigEiAgE2iwEZkgEiAgEykwEZmgEiAgEumwEZogEiAgEqowEZqgEiAgEmqwEZsgEiAgEiswEZugEiAgEevAGsAbwBzgECARq9AegBvQHkAgIBGL0BowG9AdwBAgEXiAFEiAFJAgE5hQFFhQFMAgE3kAFEkAFJAgE1jQFFjQFMAgEzmAFEmAFIAgExlQFFlQFMAgEvoAFEoAFNAgEtnQFFnQFMAgErqAFEqAFHAgEppQFFpQFMAgEnsAFEsAFKAgElrQFFrQFMAgEjuAFEuAFJAgEhtQFFtQFMAgEf</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -314,7 +313,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="264,764">
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="264,908">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -322,7 +321,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="GKS_059_1" sap:VirtualizedContainerService.HintSize="304,844">
+      <sap2010:ViewStateData Id="GKS_059_1" sap:VirtualizedContainerService.HintSize="304,988">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
