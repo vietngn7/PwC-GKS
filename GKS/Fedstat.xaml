@@ -66,27 +66,20 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Fedstat" sap2010:WorkflowViewState.IdRef="Sequence_3">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="https://fedstat.ru/indicator/57606" Name="url" />
     </Sequence.Variables>
-    <ui:CommentOut DisplayName="Comment Out" sap2010:WorkflowViewState.IdRef="CommentOut_1">
-      <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_4">
-          <Assign DisplayName="1. Assign" sap2010:WorkflowViewState.IdRef="Assign_1">
-            <Assign.To>
-              <OutArgument x:TypeArguments="x:String">[url]</OutArgument>
-            </Assign.To>
-            <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[row(1).ToString]</InArgument>
-            </Assign.Value>
-          </Assign>
-        </Sequence>
-      </ui:CommentOut.Body>
-    </ui:CommentOut>
+    <Assign DisplayName="1. Assign" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[url]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[row(1).ToString]</InArgument>
+      </Assign.Value>
+    </Assign>
     <ui:OpenBrowser UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="3. Open Browser" Hidden="False" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" NewSession="True" Private="True" Url="[url]">
       <ui:OpenBrowser.Body>
         <ActivityAction x:TypeArguments="x:Object">
@@ -464,19 +457,11 @@
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
-    <sads:DebugSymbol.Symbol>dzRcXG1hY1xIb21lXERvd25sb2Fkc1xVaVBhdGhcUHdDLUdLU1xHS1NcRmVkc3RhdC54YW1sUEgD1AMOAgEBSjRKWAIBAkwFWRUCAWFaBdIDFgIBA1rBAVrIAQIBX2ALzwMWAgEEZQ3GAxgCARbHAw3LAx4CAQ7MAw3MA6EBAgEJzQMNzQO5AQIBBs4DDc4DdAIBBWYPvQEaAgFNvgEPlQIaAgE7lgIP7QIaAgEp7gIPxQMaAgEXxwPPAscD1AICARXJA6AByQPbAQIBFMcDgwHHA4gBAgETxwNJxwNPAgESxwNaxwNuAgEQxwPHAccDiwICAQ/MA5kBzAOeAQIBDMwDK8wDPwIBCs0DogHNA6cBAgEHaEBoUgIBTmsReRwCAV16EYgBHAIBWokBEZYBIQIBWZcBEZ4BGgIBVJ8BEa0BHAIBUa4BEbwBHAIBT8EBQMEBZAIBPMMBEdEBHAIBS9IBEeABHAIBSOEBEe4BIQIBR+8BEfYBGgIBQvcBEYUCHAIBP4YCEZQCHAIBPZgCQJgCVgIBKpsCEakCHAIBOaoCEbgCHAIBNrkCEcYCIQIBNccCEc4CGgIBMM8CEd0CHAIBLd4CEewCHAIBK/ACQPACYwIBGPMCEYEDHAIBJ4IDEZADHAIBJJEDEZ4DIQIBI58DEaYDGgIBHqcDEbUDHAIBG7YDEcQDHAIBGXekAXfnAQIBXoYBpAGGAY8CAgFcelN6WQIBW5wBPJwBrAECAVeZAT2ZAUcCAVWrAaQBqwGwAQIBUroBpAG6Ab4DAgFQzwGkAc8BlAICAUzeAaQB3gGPAgIBStIBU9IBWQIBSfQBPPQBqwECAUXxAT3xAUcCAUODAqQBgwKwAQIBQJICpAGSAr4DAgE+pwKkAacClAICATq2AqQBtgKPAgIBOKoCU6oCWQIBN8wCPMwCqwECATPJAj3JAkcCATHbAqQB2wKwAQIBLuoCpAHqAr4DAgEs/wKkAf8ClAICASiOA6QBjgOPAgIBJoIDU4IDWQIBJaQDPKQDqwECASGhAz2hA0cCAR+zA6QBswOwAQIBHMIDpAHCA74DAgEa</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzRcXG1hY1xIb21lXERvd25sb2Fkc1xVaVBhdGhcUHdDLUdLU1xHS1NcRmVkc3RhdC54YW1sUkcDzQMOAgEBSTRJWAIBAksFUg4CAWFTBcsDFgIBA1AwUEECAWRNMU02AgFiU8EBU8gBAgFfWQvIAxYCAQReDb8DGAIBFsADDcQDHgIBDsUDDcUDoQECAQnGAw3GA7kBAgEGxwMNxwN0AgEFXw+2ARoCAU23AQ+OAhoCATuPAg/mAhoCASnnAg++AxoCARfAA88CwAPUAgIBFcIDoAHCA9sBAgEUwAODAcADiAECARPAA0nAA08CARLAA1rAA24CARDAA8cBwAOLAgIBD8UDmQHFA54BAgEMxQMrxQM/AgEKxgOiAcYDpwECAQdhQGFSAgFOZBFyHAIBXXMRgQEcAgFaggERjwEhAgFZkAERlwEaAgFUmAERpgEcAgFRpwERtQEcAgFPugFAugFkAgE8vAERygEcAgFLywER2QEcAgFI2gER5wEhAgFH6AER7wEaAgFC8AER/gEcAgE//wERjQIcAgE9kQJAkQJWAgEqlAIRogIcAgE5owIRsQIcAgE2sgIRvwIhAgE1wAIRxwIaAgEwyAIR1gIcAgEt1wIR5QIcAgEr6QJA6QJjAgEY7AIR+gIcAgEn+wIRiQMcAgEkigMRlwMhAgEjmAMRnwMaAgEeoAMRrgMcAgEbrwMRvQMcAgEZcKQBcOcBAgFef6QBf48CAgFcc1NzWQIBW5UBPJUBrAECAVeSAT2SAUcCAVWkAaQBpAGwAQIBUrMBpAGzAb4DAgFQyAGkAcgBlAICAUzXAaQB1wGPAgIBSssBU8sBWQIBSe0BPO0BqwECAUXqAT3qAUcCAUP8AaQB/AGwAQIBQIsCpAGLAr4DAgE+oAKkAaAClAICATqvAqQBrwKPAgIBOKMCU6MCWQIBN8UCPMUCqwECATPCAj3CAkcCATHUAqQB1AKwAQIBLuMCpAHjAr4DAgEs+AKkAfgClAICASiHA6QBhwOPAgIBJvsCU/sCWQIBJZ0DPJ0DqwECASGaAz2aA0cCAR+sA6QBrAOwAQIBHLsDpAG7A74DAgEa</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="242,60" />
-      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="264,184">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="CommentOut_1" sap:VirtualizedContainerService.HintSize="416,262" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="414,60" />
       <sap2010:ViewStateData Id="Click_1" sap:VirtualizedContainerService.HintSize="314,106" />
       <sap2010:ViewStateData Id="Click_2" sap:VirtualizedContainerService.HintSize="314,106" />
       <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="242,60" />
@@ -498,7 +483,7 @@
       <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="314,60" />
       <sap2010:ViewStateData Id="Click_3" sap:VirtualizedContainerService.HintSize="314,106" />
       <sap2010:ViewStateData Id="Click_4" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="200,52">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="336,860">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -591,7 +576,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="OpenBrowser_1" sap:VirtualizedContainerService.HintSize="416,644">
+      <sap2010:ViewStateData Id="OpenBrowser_1" sap:VirtualizedContainerService.HintSize="414,644">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -599,14 +584,14 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="438,1070">
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="436,868">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Fedstat_1" sap:VirtualizedContainerService.HintSize="478,989">
+      <sap2010:ViewStateData Id="Fedstat_1" sap:VirtualizedContainerService.HintSize="476,948">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>

@@ -160,7 +160,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="MainFlow_1" sap:VirtualizedContainerService.HintSize="702,891.5">
+      <sap2010:ViewStateData Id="MainFlow_1" sap:VirtualizedContainerService.HintSize="702,931.5">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
