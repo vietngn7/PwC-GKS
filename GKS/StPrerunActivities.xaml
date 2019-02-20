@@ -62,17 +62,17 @@
       <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="StPrerunActivities" sap2010:WorkflowViewState.IdRef="Sequence_1">
-    <ui:MessageBox ChosenButton="{x:Null}" Buttons="Ok" Caption="[&quot;Робот-аудитор &quot; + robotName]" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="Перед началом работы Робота будут закрыты все файлы Excel и браузер MS Explorer. Пожалуйста, сохраните все изменения и затем нажмите на OK" TopMost="True" />
+    <ui:MessageBox ChosenButton="{x:Null}" Buttons="Ok" Caption="[&quot;Робот-аудитор &quot; + robotName]" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Перед началом работы Робота будут закрыты все файлы Excel и браузер Google Chrome. Пожалуйста, сохраните все изменения и затем нажмите на OK&quot;]" TopMost="True" />
     <ui:KillProcess ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process" sap2010:WorkflowViewState.IdRef="KillProcess_1" ProcessName="EXCEL" />
-    <ui:KillProcess ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process" sap2010:WorkflowViewState.IdRef="KillProcess_2" ProcessName="iexplore" />
-    <ui:MessageBox ChosenButton="{x:Null}" Buttons="Ok" Caption="[&quot;Робот-аудитор &quot; + robotName]" DisplayName="Message Box" Text="Выберите исходный файл конфигурации" TopMost="True" sap2010:WorkflowViewState.IdRef="MessageBox_2" />
-    <ui:SelectFile DisplayName="Select File" Filter="All files (*.*)|*.*" SelectedFile="[configFilePath]" sap2010:WorkflowViewState.IdRef="SelectFile_1" />
-    <sads:DebugSymbol.Symbol>dy5FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0UHJlcnVuQWN0aXZpdGllcy54YW1sDUUDTA4CAQFGBUbYAgIBDUcFR6QBAgELSAVIpwECAQlJBUnxAQIBBUoFSpwBAgECRkFGawIBD0a6AUbGAgIBDkeaAUehAQIBDEiaAUikAQIBCklBSWsCAQdJiwFJsAECAQZKWEpqAgED</sads:DebugSymbol.Symbol>
+    <ui:KillProcess ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process" sap2010:WorkflowViewState.IdRef="KillProcess_2" ProcessName="chrome" />
+    <ui:MessageBox ChosenButton="{x:Null}" Buttons="Ok" Caption="[&quot;Робот-аудитор &quot; + robotName]" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;Выберите исходный файл конфигурации&quot;]" TopMost="True" />
+    <ui:SelectFile DisplayName="Select File" Filter="All files (*.*)|*.*" sap2010:WorkflowViewState.IdRef="SelectFile_1" SelectedFile="[configFilePath]" />
+    <sads:DebugSymbol.Symbol>dy5FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0UHJlcnVuQWN0aXZpdGllcy54YW1sDUUDTA4CAQFGBUboAgIBDUcFR6QBAgELSAVIpQECAQlJBUn/AQIBBUoFSpwBAgECRkFGawIBD0a6AUbWAgIBDkeaAUehAQIBDEiaAUiiAQIBCklBSWsCAQdJugFJ7QECAQZKhwFKmQECAQM=</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -88,7 +88,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="StPrerunActivities_1" sap:VirtualizedContainerService.HintSize="376.8,592" />
+      <sap2010:ViewStateData Id="StPrerunActivities_1" sap:VirtualizedContainerService.HintSize="376.8,552" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

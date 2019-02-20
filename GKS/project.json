@@ -3,10 +3,9 @@
   "description": "Data scraping GKS",
   "main": "MainFlow.xaml",
   "dependencies": {
-    "UiPath.UIAutomation.Activities": "[18.4.2]",
-    "UiPath.System.Activities": "[18.4.1]",
-    "UiPath.Excel.Activities": "[2.4.6884.25683]",
-    "UiPath.Mail.Activities": "[1.2.6863.29868]"
+    "UiPath.UIAutomation.Activities": "[19.1.0]",
+    "UiPath.System.Activities": "[18.4.2]",
+    "UiPath.Excel.Activities": "[2.5.1]"
   },
   "schemaVersion": "3.2",
   "studioVersion": "18.4.1.0",
