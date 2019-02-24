@@ -88,12 +88,16 @@
                     <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
                   </ActivityAction.Argument>
                   <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="sd:DataTable" Default="[new System.Data.DataTable()]" Name="ExtractedData" />
+                    </Sequence.Variables>
                     <If Condition="[InStr(row(1).ToString, &quot;stat&quot;) &gt; 0]" sap2010:WorkflowViewState.IdRef="If_1">
                       <If.Then>
                         <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Пока тут явно передается только первый элемент" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Fedstat.xaml">
                           <ui:InvokeWorkflowFile.Arguments>
                             <InOutArgument x:TypeArguments="sd:DataRow" x:Key="row">[row]</InOutArgument>
                             <InArgument x:TypeArguments="ui:Browser" x:Key="browser">[rbaBrowser]</InArgument>
+                            <OutArgument x:TypeArguments="sd:DataTable" x:Key="ExtractDataTable">[ExtractedData]</OutArgument>
                           </ui:InvokeWorkflowFile.Arguments>
                         </ui:InvokeWorkflowFile>
                       </If.Then>
@@ -102,10 +106,17 @@
                           <ui:InvokeWorkflowFile.Arguments>
                             <InOutArgument x:TypeArguments="sd:DataRow" x:Key="row">[row]</InOutArgument>
                             <InArgument x:TypeArguments="ui:Browser" x:Key="browser">[rbaBrowser]</InArgument>
+                            <OutArgument x:TypeArguments="sd:DataTable" x:Key="ExtractDataTable">[ExtractedData]</OutArgument>
                           </ui:InvokeWorkflowFile.Arguments>
                         </ui:InvokeWorkflowFile>
                       </If.Else>
                     </If>
+                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke StWtiteData workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="StUpdateData.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="sd:DataTable" x:Key="ExtractDataTable">[ExtractedData]</InArgument>
+                        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="originalDataTable">[dt]</InOutArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
                   </Sequence>
                 </ActivityAction>
               </ui:ForEachRow.Body>
@@ -114,21 +125,22 @@
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
-    <sads:DebugSymbol.Symbol>dy5FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXERhdGFQcm9jY2Vzc2luZ1NlcS54YW1sEkkDdg4CAQFNBXQWAgECTbEBTb8BAgEXTcQBTdMBAgEWUwtxFgIBA1QNcB0CAQRUPlREAgEUWhNtHgIBBVsVbBoCAQZbI1tWAgEHXRliMQIBDmUZajECAQhgVmBiAgESX1VfWgIBEF3fAV3tAQIBD2hWaGICAQxnVWdaAgEKZd8BZekBAgEJ</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dy5FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXERhdGFQcm9jY2Vzc2luZ1NlcS54YW1sGUkDgQEOAgEBTQV/FgIBAk2xAU2/AQIBIk3EAU3TAQIBIVMLfBYCAQNUDXsdAgEEVD5URAIBH1oTeB4CAQVcSFxnAgEGXhVxGgIBDXIVdy0CAQdeI15WAgEOYBlmMQIBF2kZbzECAQ91YXVlAgELdF10bAIBCXLIAXLbAQIBCGNWY2ICAR1iVWJaAgEbZGJkcQIBGWDfAWDtAQIBGGxWbGICARVrVWtaAgETbWJtcQIBEWnfAWnpAQIBEA==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
       <sap2010:ViewStateData Id="InvokeWorkflowFile_1" sap:VirtualizedContainerService.HintSize="314.4,88" />
       <sap2010:ViewStateData Id="InvokeWorkflowFile_2" sap:VirtualizedContainerService.HintSize="314.4,88" />
       <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="653.6,237.6" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="676,362.4">
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_3" sap:VirtualizedContainerService.HintSize="653.6,88" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="676,490.4">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEachRow_1" sap:VirtualizedContainerService.HintSize="706.4,511.2">
+      <sap2010:ViewStateData Id="ForEachRow_1" sap:VirtualizedContainerService.HintSize="706.4,639.2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>

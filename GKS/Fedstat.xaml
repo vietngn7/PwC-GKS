@@ -13,6 +13,7 @@
   <x:Members>
     <x:Property Name="row" Type="InOutArgument(sd:DataRow)" />
     <x:Property Name="browser" Type="InArgument(ui:Browser)" />
+    <x:Property Name="ExtractDataTable" Type="OutArgument(sd:DataTable)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
@@ -92,7 +93,6 @@
             <Sequence sap2010:WorkflowViewState.IdRef="Sequence_14">
               <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_2">
                 <Sequence.Variables>
-                  <Variable x:TypeArguments="sd:DataTable" Name="ExtractDataTable" />
                   <Variable x:TypeArguments="x:String" Name="s" />
                 </Sequence.Variables>
                 <Sequence DisplayName="InputValues" sap2010:WorkflowViewState.IdRef="Sequence_12">
@@ -454,15 +454,13 @@
                     <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="5647151ee173ea27b3005e6da9658fbc" Selector="&lt;webctrl parentid='mCSB_6_container' tag='TABLE' /&gt;" WaitForReady="COMPLETE" />
                   </ui:ExtractData.Target>
                 </ui:ExtractData>
-                <ui:OutputDataTable DataTable="[ExtractDataTable]" DisplayName="Output Data Table" sap2010:WorkflowViewState.IdRef="OutputDataTable_1" Text="[s]" />
-                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[s]" TopMost="True" />
               </Sequence>
             </Sequence>
           </Sequence>
         </ActivityAction>
       </ui:BrowserScope.Body>
     </ui:BrowserScope>
-    <sads:DebugSymbol.Symbol>dyNFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXEZlZHN0YXQueGFtbFVIA9IDDgIBAUo0SlgCAQJMBVMOAgFlVAXQAxcCAQNRMFFBAgFoTjFONgIBZlRzVH4CAWNaC80DFgIBBFsNW4YBAgFgXA3MAxgCAQVbfFuDAQIBYV0PywMaAgEGYhHDAxwCARfEAxHIAyICAQ/JAxHJA6UBAgEKygMRygO9AQIBB2MTugEeAgFOuwETkgIeAgE8kwIT6gIeAgEq6wITwgMeAgEYxAPTAsQD2AICARbGA6QBxgPfAQIBFcQDhwHEA4wBAgEUxANNxANTAgETxANexANyAgERxAPLAcQDjwICARDJA50ByQOiAQIBDckDL8kDQwIBC8oDpgHKA6sBAgEIZURlVgIBT2gVdiACAV53FYUBIAIBW4YBFZMBJQIBWpQBFZsBHgIBVZwBFaoBIAIBUqsBFbkBIAIBUL4BRL4BaAIBPcABFc4BIAIBTM8BFd0BIAIBSd4BFesBJQIBSOwBFfMBHgIBQ/QBFYICIAIBQIMCFZECIAIBPpUCRJUCWgIBK5gCFaYCIAIBOqcCFbUCIAIBN7YCFcMCJQIBNsQCFcsCHgIBMcwCFdoCIAIBLtsCFekCIAIBLO0CRO0CZwIBGfACFf4CIAIBKP8CFY0DIAIBJY4DFZsDJQIBJJwDFaMDHgIBH6QDFbIDIAIBHLMDFcEDIAIBGnSoAXTrAQIBX4MBqAGDAeYBAgFdd1d3XQIBXJkBQJkBsAECAViWAUGWAUsCAVaoAagBqAG0AQIBU7cBqAG3AZUDAgFRzAGoAcwBmAICAU3bAagB2wGTAgIBS88BV88BXQIBSvEBQPEBrwECAUbuAUHuAUsCAUSAAqgBgAK0AQIBQY8CqAGPAsIDAgE/pAKoAaQCmAICATuzAqgBswKTAgIBOacCV6cCXQIBOMkCQMkCrwECATTGAkHGAksCATLYAqgB2AK0AQIBL+cCqAHnAsIDAgEt/AKoAfwCmAICASmLA6gBiwOTAgIBJ/8CV/8CXQIBJqEDQKEDrwECASKeA0GeA0sCASCwA6gBsAO0AQIBHb8DqAG/A8IDAgEb</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dyNFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXEZlZHN0YXQueGFtbFBJA9ADDgIBAUs0S1gCAQJNBVQOAgFdVQXOAxcCAQNSMFJBAgFgTzFPNgIBXlVzVX4CAVtbC8sDFgIBBFwNXIYBAgFYXQ3KAxgCAQVcfFyDAQIBWV4PyQMaAgEGYhHDAxwCAQ/EAxHIAyICAQdjE7oBHgIBRrsBE5ICHgIBNJMCE+oCHgIBIusCE8IDHgIBEMQD0wLEA9gCAgEOxgOkAcYD3wECAQ3EA4cBxAOMAQIBDMQDTcQDUwIBC8QDXsQDcgIBCcQDywHEA48CAgEIZURlVgIBR2gVdiACAVZ3FYUBIAIBU4YBFZMBJQIBUpQBFZsBHgIBTZwBFaoBIAIBSqsBFbkBIAIBSL4BRL4BaAIBNcABFc4BIAIBRM8BFd0BIAIBQd4BFesBJQIBQOwBFfMBHgIBO/QBFYICIAIBOIMCFZECIAIBNpUCRJUCWgIBI5gCFaYCIAIBMqcCFbUCIAIBL7YCFcMCJQIBLsQCFcsCHgIBKcwCFdoCIAIBJtsCFekCIAIBJO0CRO0CZwIBEfACFf4CIAIBIP8CFY0DIAIBHY4DFZsDJQIBHJwDFaMDHgIBF6QDFbIDIAIBFLMDFcEDIAIBEnSoAXTrAQIBV4MBqAGDAeYBAgFVd1d3XQIBVJkBQJkBsAECAVCWAUGWAUsCAU6oAagBqAG0AQIBS7cBqAG3AZUDAgFJzAGoAcwBmAICAUXbAagB2wGTAgIBQ88BV88BXQIBQvEBQPEBrwECAT7uAUHuAUsCATyAAqgBgAK0AQIBOY8CqAGPAsIDAgE3pAKoAaQCmAICATOzAqgBswKTAgIBMacCV6cCXQIBMMkCQMkCrwECASzGAkHGAksCASrYAqgB2AK0AQIBJ+cCqAHnAsIDAgEl/AKoAfwCmAICASGLA6gBiwOTAgIBH/8CV/8CXQIBHqEDQKEDrwECARqeA0GeA0sCARiwA6gBsAO0AQIBFb8DqAG/A8IDAgET</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -571,10 +569,8 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ExtractData_1" sap:VirtualizedContainerService.HintSize="200,52.8" />
-      <sap2010:ViewStateData Id="OutputDataTable_1" sap:VirtualizedContainerService.HintSize="200,22.4" />
-      <sap2010:ViewStateData Id="MessageBox_1" sap:VirtualizedContainerService.HintSize="200,52.8" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="222.4,425.6">
+      <sap2010:ViewStateData Id="ExtractData_1" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="222.4,270.4">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
