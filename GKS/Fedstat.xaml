@@ -487,7 +487,7 @@
       <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="416,60" />
       <sap2010:ViewStateData Id="Click_3" sap:VirtualizedContainerService.HintSize="416,107.2" />
       <sap2010:ViewStateData Id="Click_4" sap:VirtualizedContainerService.HintSize="416,107.2" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="438.4,1076.8">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="200,52.8">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -509,7 +509,7 @@
       <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="416,60" />
       <sap2010:ViewStateData Id="Click_7" sap:VirtualizedContainerService.HintSize="416,107.2" />
       <sap2010:ViewStateData Id="Click_8" sap:VirtualizedContainerService.HintSize="416,107.2" />
-      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="438.4,1076.8">
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="200,52.8">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -531,7 +531,7 @@
       <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="416,60" />
       <sap2010:ViewStateData Id="Click_12" sap:VirtualizedContainerService.HintSize="416,107.2" />
       <sap2010:ViewStateData Id="Click_13" sap:VirtualizedContainerService.HintSize="416,107.2" />
-      <sap2010:ViewStateData Id="Sequence_9" sap:VirtualizedContainerService.HintSize="438.4,1076.8">
+      <sap2010:ViewStateData Id="Sequence_9" sap:VirtualizedContainerService.HintSize="200,52.8">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -539,8 +539,8 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Click_14" sap:VirtualizedContainerService.HintSize="416,107.2" />
-      <sap2010:ViewStateData Id="Click_15" sap:VirtualizedContainerService.HintSize="416,107.2" />
+      <sap2010:ViewStateData Id="Click_14" sap:VirtualizedContainerService.HintSize="243.2,52.8" />
+      <sap2010:ViewStateData Id="Click_15" sap:VirtualizedContainerService.HintSize="243.2,52.8" />
       <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="243.2,60" />
       <sap2010:ViewStateData Id="Sequence_10" sap:VirtualizedContainerService.HintSize="265.6,184.8">
         <sap:WorkflowViewStateService.ViewState>
@@ -549,11 +549,11 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="CommentOut_5" sap:VirtualizedContainerService.HintSize="416,263.2" />
-      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="416,60" />
-      <sap2010:ViewStateData Id="Click_16" sap:VirtualizedContainerService.HintSize="416,107.2" />
-      <sap2010:ViewStateData Id="Click_17" sap:VirtualizedContainerService.HintSize="416,107.2" />
-      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="438.4,1076.8">
+      <sap2010:ViewStateData Id="CommentOut_5" sap:VirtualizedContainerService.HintSize="243.2,52.8" />
+      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="243.2,60" />
+      <sap2010:ViewStateData Id="Click_16" sap:VirtualizedContainerService.HintSize="243.2,52.8" />
+      <sap2010:ViewStateData Id="Click_17" sap:VirtualizedContainerService.HintSize="243.2,52.8" />
+      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="200,52.8">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -569,7 +569,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ExtractData_1" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="ExtractData_1" sap:VirtualizedContainerService.HintSize="200,52.8" />
       <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="222.4,270.4">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -578,7 +578,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="244.8,550.4">
+      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="244.8,395.2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -592,7 +592,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="BrowserScope_1" sap:VirtualizedContainerService.HintSize="414.4,201.6">
+      <sap2010:ViewStateData Id="BrowserScope_1" sap:VirtualizedContainerService.HintSize="414.4,161.6">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsPinned">True</x:Boolean>
