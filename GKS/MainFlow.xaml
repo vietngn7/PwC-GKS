@@ -77,7 +77,7 @@
         </ui:InvokeWorkflowFile>
         <FlowStep.Next>
           <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_6">
-            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Sequence to read an excel file and get data from there.&#xA;&#xA;INPUT   : ?&#xA;OUTPUT: ?&#xA;" DisplayName="Invoke StReadConfigFile workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="StReadConfigFile.xaml">
+            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Sequence to read an excel file and get data from there.&#xA;&#xD;&#xA;Excel Params (it was set as default)&#xD;&#xA;Excel table name: &quot;InputData&quot;&#xD;&#xA;Excel sheet name: &quot;NewParams&quot;&#xD;&#xA;&#xA;INPUT   : Excel file path, table name, table sheet&#xA;OUTPUT: Datatable with data&#xA;" DisplayName="Invoke StReadConfigFile workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="StReadConfigFile.xaml">
               <ui:InvokeWorkflowFile.Arguments>
                 <InArgument x:TypeArguments="x:String" x:Key="configFilePath">[configFilePath]</InArgument>
                 <InArgument x:TypeArguments="x:String" x:Key="paramsTableName">InputData</InArgument>
@@ -101,12 +101,12 @@
     <x:Reference>__ReferenceID0</x:Reference>
     <x:Reference>__ReferenceID1</x:Reference>
     <x:Reference>__ReferenceID2</x:Reference>
-    <sads:DebugSymbol.Symbol>dzVcXG1hY1xIb21lXERvd25sb2Fkc1xVaVBhdGhcUHdDLUdLU1xHS1NcTWFpbkZsb3cueGFtbA5BA2kPAgEBSAlNIQIBDlANVyUCAQZaEV4pAgECS0xLXAIBEUpGSlECARBIwwFI3AECAQ9ST1JfAgEMVVVVZgIBClRQVFkCAQlTUFNZAgEIUMkCUOACAgEHXE5cXwIBBFr3AlqQAwIBAw==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzVcXE1hY1xIb21lXERvd25sb2Fkc1xVaVBhdGhcUHdDLUdLU1xHS1NcTWFpbkZsb3cueGFtbA5BA2kPAgEBSAlNIQIBDlANVyUCAQZaEV4pAgECS0xLXAIBEUpGSlECARBIwwFI3AECAQ9ST1JfAgEMVVVVZgIBClRQVFkCAQlTUFNZAgEIUJwEULMEAgEHXE5cXwIBBFr3AlqQAwIBAw==</sads:DebugSymbol.Symbol>
   </Flowchart>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
       <sap2010:ViewStateData Id="InvokeWorkflowFile_4" sap:VirtualizedContainerService.HintSize="200,52" />
-      <sap2010:ViewStateData Id="InvokeWorkflowFile_5" sap:VirtualizedContainerService.HintSize="200,160">
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_5" sap:VirtualizedContainerService.HintSize="314,259">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
@@ -160,7 +160,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="MainFlow_1" sap:VirtualizedContainerService.HintSize="702,931.5">
+      <sap2010:ViewStateData Id="MainFlow_1" sap:VirtualizedContainerService.HintSize="702,891.5">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
