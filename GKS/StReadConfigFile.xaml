@@ -67,7 +67,6 @@
       <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="StReadConfigFile" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -106,26 +105,18 @@
           </ui:ExcelApplicationScope>
         </TryCatch.Try>
         <TryCatch.Catches>
-          <Catch x:TypeArguments="ui:ExcelException" sap2010:WorkflowViewState.IdRef="Catch`1_1">
-            <ActivityAction x:TypeArguments="ui:ExcelException">
-              <ActivityAction.Argument>
-                <DelegateInArgument x:TypeArguments="ui:ExcelException" Name="exception" />
-              </ActivityAction.Argument>
-            </ActivityAction>
-          </Catch>
-          <Catch x:TypeArguments="s:Exception">
+          <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_2">
             <ActivityAction x:TypeArguments="s:Exception">
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
               </ActivityAction.Argument>
-              <WriteLine DisplayName="Write Line" Text="Не удалось открыть файл конфигурации. Повторяю попытку" sap2010:WorkflowViewState.IdRef="WriteLine_1" />
+              <WriteLine DisplayName="Write Line" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="Не удалось открыть файл конфигурации. Повторяю попытку" />
             </ActivityAction>
-            <sap2010:WorkflowViewState.IdRef>Catch`1_2</sap2010:WorkflowViewState.IdRef>
           </Catch>
         </TryCatch.Catches>
       </TryCatch>
     </DoWhile>
-    <sads:DebugSymbol.Symbol>dyxFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0UmVhZENvbmZpZ0ZpbGUueGFtbBZJA4EBDgIBAUw1TDwCAQJOBX8PAgEDTltOdgIBHk8HfhICAQRRC2omAgEHeQ95oQECAQVRvAFRzgECARxXEWccAgEIeTh5cAIBBlgTXh4CAQ1fE2YcAgEJXBVc6gECARVdFV3fAQIBDmQ/ZEMCAQxhQGFVAgEKXJcBXKsBAgEaXNQBXOcBAgEYXLYBXMkBAgEWXURdVwIBE12qAV2+AQIBEV3JAV3cAQIBDw==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dyxFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0UmVhZENvbmZpZ0ZpbGUueGFtbBZIA3gOAgEBSzVLPAIBAk0Fdg8CAQNNW012AgEeTgd1EgIBBFALaSYCAQdxD3GhAQIBBVC8AVDOAQIBHFYRZhwCAQhxZnGeAQIBBlcTXR4CAQ1eE2UcAgEJWxVb6gECARVcFVzfAQIBDmM/Y0MCAQxgQGBVAgEKW5cBW6sBAgEaW9QBW+cBAgEYW7YBW8kBAgEWXERcVwIBE1yqAVy+AQIBEVzJAVzcAQIBDw==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -147,14 +138,6 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="414.4,619.2" />
-      <sap2010:ViewStateData Id="Catch`1_1" sap:VirtualizedContainerService.HintSize="400,22.4">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="WriteLine_1" sap:VirtualizedContainerService.HintSize="210.4,62.4" />
       <sap2010:ViewStateData Id="Catch`1_2" sap:VirtualizedContainerService.HintSize="400,132.8">
         <sap:WorkflowViewStateService.ViewState>
@@ -164,16 +147,16 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="414.4,320.8" />
-      <sap2010:ViewStateData Id="DoWhile_1" sap:VirtualizedContainerService.HintSize="464,432.8" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="486.4,557.6">
+      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="414.4,297.6" />
+      <sap2010:ViewStateData Id="DoWhile_1" sap:VirtualizedContainerService.HintSize="464,460" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="486.4,584.8">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="StReadConfigFile_1" sap:VirtualizedContainerService.HintSize="526.4,637.6" />
+      <sap2010:ViewStateData Id="StReadConfigFile_1" sap:VirtualizedContainerService.HintSize="526.4,664.8" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
