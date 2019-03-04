@@ -68,6 +68,7 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Interop</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="This sequence is to process each row and to invoke specific workflow for that row.&#xA;&#xA;INPUT   : DataTable dt&#xA;OUTPUT: Updated DataTable with updated values&#xA;&#xA;TODO:&#xA;1. Подумать как реализовать проход по всем строкам.&#xA;2. Какие аргументы у workflow&#xA;3. Как обновлять данные в табличке&#xA;&#xA;" DisplayName="DataProccessingSeq" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -76,12 +77,6 @@
       <Variable x:TypeArguments="x:String" Name="lastMonthYear" />
       <Variable x:TypeArguments="x:Int32" Name="lastIndex" />
     </Sequence.Variables>
-    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke StPreprocessDataTable workflow" UnSafe="False" WorkflowFileName="StPreprocessDataTable.xaml">
-      <ui:InvokeWorkflowFile.Arguments>
-        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dt">[dt]</InOutArgument>
-      </ui:InvokeWorkflowFile.Arguments>
-      <sap2010:WorkflowViewState.IdRef>InvokeWorkflowFile_4</sap2010:WorkflowViewState.IdRef>
-    </ui:InvokeWorkflowFile>
     <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Int32">[lastIndex]</OutArgument>
@@ -98,6 +93,11 @@
         <InArgument x:TypeArguments="x:String">[dt.Columns(lastIndex).ColumnName]</InArgument>
       </Assign.Value>
     </Assign>
+    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke StPreprocessDataTable workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="StPreprocessDataTable.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dt">[dt]</InOutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
     <ui:OpenBrowser BrowserType="Chrome" DisplayName="Open Browser" Hidden="False" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" NewSession="False" Private="False" UiBrowser="[rbaBrowser]" Url="www.yandex.ru">
       <ui:OpenBrowser.Body>
         <ActivityAction x:TypeArguments="x:Object">
@@ -105,7 +105,10 @@
             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
           </ActivityAction.Argument>
           <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_3">
-            <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dt]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:Int32" Name="currentRowIndex" />
+            </Sequence.Variables>
+            <ui:ForEachRow CurrentIndex="[currentRowIndex]" DataTable="[dt]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
               <ui:ForEachRow.Body>
                 <ActivityAction x:TypeArguments="sd:DataRow">
                   <ActivityAction.Argument>
@@ -117,7 +120,7 @@
                     </Sequence.Variables>
                     <If Condition="[InStr(row(1).ToString, &quot;stat&quot;) &gt; 0]" sap2010:WorkflowViewState.IdRef="If_1">
                       <If.Then>
-                        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Пока тут явно передается только первый элемент" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Fedstat.xaml">
+                        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Вызывается шаг для выгрузки данных с fedstat" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Fedstat.xaml">
                           <ui:InvokeWorkflowFile.Arguments>
                             <InOutArgument x:TypeArguments="sd:DataRow" x:Key="row">[row]</InOutArgument>
                             <InArgument x:TypeArguments="ui:Browser" x:Key="browser">[rbaBrowser]</InArgument>
@@ -126,7 +129,7 @@
                         </ui:InvokeWorkflowFile>
                       </If.Then>
                       <If.Else>
-                        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Пока тут явно передается только первый элемент" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="GKS.xaml">
+                        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Вызывается шаг для выгрузки данных с ГКС" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="GKS.xaml">
                           <ui:InvokeWorkflowFile.Arguments>
                             <InOutArgument x:TypeArguments="sd:DataRow" x:Key="row">[row]</InOutArgument>
                             <InArgument x:TypeArguments="ui:Browser" x:Key="browser">[rbaBrowser]</InArgument>
@@ -135,12 +138,13 @@
                         </ui:InvokeWorkflowFile>
                       </If.Else>
                     </If>
-                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke StWtiteData workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="StUpdateData.xaml">
+                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Обновляем данные в таблице по результатам загрузки" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="StUpdateData.xaml">
                       <ui:InvokeWorkflowFile.Arguments>
                         <InArgument x:TypeArguments="sd:DataTable" x:Key="ExtractDataTable">[ExtractedData]</InArgument>
                         <InOutArgument x:TypeArguments="sd:DataTable" x:Key="originalDataTable">[dt]</InOutArgument>
                         <InArgument x:TypeArguments="x:String" x:Key="beginSearchData">[lastMonthYear]</InArgument>
                         <InArgument x:TypeArguments="x:Int32" x:Key="beginIndex" />
+                        <InArgument x:TypeArguments="x:Int32" x:Key="currentRowIndex">[currentRowIndex]</InArgument>
                       </ui:InvokeWorkflowFile.Arguments>
                     </ui:InvokeWorkflowFile>
                   </Sequence>
@@ -151,13 +155,13 @@
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
-    <sads:DebugSymbol.Symbol>dy5FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXERhdGFQcm9jY2Vzc2luZ1NlcS54YW1sI0kDmwEOAgEBTwVUHQIBLlUFXA4CASpdBWQOAgEmZQWZARYCAQJRQlFGAgEwT4sBT6cBAgEvWi9aRQIBLVcwVzsCAStiMGJSAgEpXzFfQAIBJ2WxAWW/AQIBJGXEAWXTAQIBI2sLlgEWAgEDbA2VAR0CAQRsPmxEAgEhchOSAR4CAQV0SHRnAgEGdhWJARoCAQ+KARWRAS0CAQd2I3ZWAgEQeBl+MQIBGYEBGYcBMQIBEY0BYY0BZQIBDYwBXYwBbAIBC44BWI4BZwIBCYoByAGKAdsBAgEIe1Z7YgIBH3pVeloCAR18YnxxAgEbeN8BeO0BAgEahAFWhAFiAgEXgwFVgwFaAgEVhQFihQFxAgETgQHfAYEB6QECARI=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dy5FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXERhdGFQcm9jY2Vzc2luZ1NlcS54YW1sJUoDnwEOAgEBUAVXDgIBMlgFXw4CAS5gBWQdAgEqZQWdARYCAQJVL1VFAgE1UjBSOwIBM10wXVICATFaMVpAAgEvYkJiRgIBLGDCAWDeAQIBK2WxAWW/AQIBKGXEAWXTAQIBJ2sLmgEWAgEDbw2ZAR0CAQRvKW88AgElb0dvTQIBI3UTlgEeAgEFd0h3ZwIBBnkVjAEaAgERjQEVlQEtAgEHeSN5VgIBEnsZgQExAgEbhAEZigExAgETkAFhkAFlAgEPkwFXkwFoAgENjwFdjwFsAgELkQFYkQFnAgEJjQHfAY0B8gECAQh+Vn5iAgEhfVV9WgIBH39if3ECAR173QF76wECARyHAVaHAWICARmGAVWGAVoCAReIAWKIAXECARWEAdkBhAHjAQIBFA==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="InvokeWorkflowFile_4" sap:VirtualizedContainerService.HintSize="743.2,88" />
       <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="743.2,60" />
       <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="743.2,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_4" sap:VirtualizedContainerService.HintSize="743.2,88" />
       <sap2010:ViewStateData Id="InvokeWorkflowFile_1" sap:VirtualizedContainerService.HintSize="314.4,88" />
       <sap2010:ViewStateData Id="InvokeWorkflowFile_2" sap:VirtualizedContainerService.HintSize="314.4,88" />
       <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="653.6,237.6" />

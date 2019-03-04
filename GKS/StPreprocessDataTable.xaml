@@ -106,11 +106,21 @@
       </Assign.Value>
     </Assign>
     <While sap2010:WorkflowViewState.IdRef="While_1" Condition="[index &lt; diffInMonths]">
-      <Sequence DisplayName="Insert columns for further data scrapping" sap2010:WorkflowViewState.IdRef="Sequence_1">
-        <ui:AddDataColumn x:TypeArguments="x:Object" Column="{x:Null}" DefaultValue="{x:Null}" AllowDBNull="True" AutoIncrement="False" ColumnName="[index.ToString()]" DataTable="[dt]" DisplayName="Add Data Column" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1" MaxLength="100" Unique="False" />
+      <Sequence DisplayName="SequeInsert columns for further data scrappingnce">
+        <ui:AddDataColumn x:TypeArguments="x:Object" Column="{x:Null}" DefaultValue="{x:Null}" AllowDBNull="True" AutoIncrement="False" ColumnName="[&quot;Month #&quot; + index.ToString()]" DataTable="[dt]" DisplayName="Add Data Column" MaxLength="100" Unique="False" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_2" />
+        <Assign>
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Int64">[index]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Int64">[index + 1]</InArgument>
+          </Assign.Value>
+          <sap2010:WorkflowViewState.IdRef>Assign_4</sap2010:WorkflowViewState.IdRef>
+        </Assign>
+        <sap2010:WorkflowViewState.IdRef>Sequence_3</sap2010:WorkflowViewState.IdRef>
       </Sequence>
     </While>
-    <sads:DebugSymbol.Symbol>dzFFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0UHJlcHJvY2Vzc0RhdGFUYWJsZS54YW1sE0cDcg4CAQFOBVUOAgEaVgVbHQIBFVwFYw4CARFkBWsOAgEMbAVwDQIBAlMyU0ACAR1QM1BAAgEbWENYcAIBGVlAWVICARdWvAFW0gECARZeMF4+AgESaS9pQQIBD2YwZjcCAQ1tB28SAgEGbEBsWwIBA24Jbq0CAgEHbpQBbqgBAgEKbrMBbrkBAgEI</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzFFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0UHJlcHJvY2Vzc0RhdGFUYWJsZS54YW1sFkcDfA4CAQFOBVUOAgEfVgVbHQIBGlwFYw4CARZkBWsOAgERbAV6DQIBAlMyU0ACASJQM1BAAgEgWENYcAIBHllAWVICARxWvAFW0gECARteMF4+AgEXaS9pQQIBFGYwZjcCARJtB3kSAgEGbEBsWwIBA24JbsMCAgEMbwl3EgIBB26UAW6+AQIBD27JAW7PAQIBDXQzdD4CAQpxNHE7AgEI</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -118,16 +128,17 @@
       <sap2010:ViewStateData Id="InvokeWorkflowFile_1" sap:VirtualizedContainerService.HintSize="464,88" />
       <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="464,60" />
       <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="464,60" />
-      <sap2010:ViewStateData Id="AddDataColumn`1_1" sap:VirtualizedContainerService.HintSize="200,22.4" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="222.4,147.2">
+      <sap2010:ViewStateData Id="AddDataColumn`1_2" sap:VirtualizedContainerService.HintSize="243.2,22.4" />
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="243.2,60" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="265.6,247.2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="While_1" sap:VirtualizedContainerService.HintSize="464,306.4" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="486.4,919.2">
+      <sap2010:ViewStateData Id="While_1" sap:VirtualizedContainerService.HintSize="464,406.4" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="486.4,1019.2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -135,7 +146,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="SetPreprocessDataTable_1" sap:VirtualizedContainerService.HintSize="526.4,999.2" />
+      <sap2010:ViewStateData Id="SetPreprocessDataTable_1" sap:VirtualizedContainerService.HintSize="526.4,1099.2" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
