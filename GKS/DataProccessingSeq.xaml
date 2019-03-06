@@ -68,7 +68,6 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Interop</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="This sequence is to process each row and to invoke specific workflow for that row.&#xA;&#xA;INPUT   : DataTable dt&#xA;OUTPUT: Updated DataTable with updated values&#xA;&#xA;TODO:&#xA;1. Подумать как реализовать проход по всем строкам.&#xA;2. Какие аргументы у workflow&#xA;3. Как обновлять данные в табличке&#xA;&#xA;" DisplayName="DataProccessingSeq" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -143,7 +142,7 @@
                         <InArgument x:TypeArguments="sd:DataTable" x:Key="ExtractDataTable">[ExtractedData]</InArgument>
                         <InOutArgument x:TypeArguments="sd:DataTable" x:Key="originalDataTable">[dt]</InOutArgument>
                         <InArgument x:TypeArguments="x:String" x:Key="beginSearchData">[lastMonthYear]</InArgument>
-                        <InArgument x:TypeArguments="x:Int32" x:Key="beginIndex" />
+                        <InArgument x:TypeArguments="x:Int32" x:Key="beginIndex">[lastIndex]</InArgument>
                         <InArgument x:TypeArguments="x:Int32" x:Key="currentRowIndex">[currentRowIndex]</InArgument>
                       </ui:InvokeWorkflowFile.Arguments>
                     </ui:InvokeWorkflowFile>
@@ -155,7 +154,7 @@
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
-    <sads:DebugSymbol.Symbol>dy5FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXERhdGFQcm9jY2Vzc2luZ1NlcS54YW1sJUoDnwEOAgEBUAVXDgIBMlgFXw4CAS5gBWQdAgEqZQWdARYCAQJVL1VFAgE1UjBSOwIBM10wXVICATFaMVpAAgEvYkJiRgIBLGDCAWDeAQIBK2WxAWW/AQIBKGXEAWXTAQIBJ2sLmgEWAgEDbw2ZAR0CAQRvKW88AgElb0dvTQIBI3UTlgEeAgEFd0h3ZwIBBnkVjAEaAgERjQEVlQEtAgEHeSN5VgIBEnsZgQExAgEbhAEZigExAgETkAFhkAFlAgEPkwFXkwFoAgENjwFdjwFsAgELkQFYkQFnAgEJjQHfAY0B8gECAQh+Vn5iAgEhfVV9WgIBH39if3ECAR173QF76wECARyHAVaHAWICARmGAVWGAVoCAReIAWKIAXECARWEAdkBhAHjAQIBFA==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dy5FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXERhdGFQcm9jY2Vzc2luZ1NlcS54YW1sJkkDngEOAgEBTwVWDgIBNFcFXg4CATBfBWMdAgEsZAWcARYCAQJUL1RFAgE3UTBROwIBNVwwXFICATNZMVlAAgExYUJhRgIBLl/CAV/eAQIBLWSxAWS/AQIBKmTEAWTTAQIBKWoLmQEWAgEDbg2YAR0CAQRuKW48AgEnbkduTQIBJXQTlQEeAgEFdkh2ZwIBBngViwEaAgETjAEVlAEtAgEHeCN4VgIBFHoZgAExAgEdgwEZiQExAgEVjwFhjwFlAgERkgFXkgFoAgEPjgFdjgFsAgENkQFSkQFdAgELkAFYkAFnAgEJjAHfAYwB8gECAQh9Vn1iAgEjfFV8WgIBIX5ifnECAR963QF66wECAR6GAVaGAWICARuFAVWFAVoCARmHAWKHAXECAReDAdkBgwHjAQIBFg==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
