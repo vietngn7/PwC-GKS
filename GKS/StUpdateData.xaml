@@ -111,7 +111,7 @@
                       <OutArgument x:TypeArguments="x:Double">[roundedExtractedDataValue]</OutArgument>
                     </Assign.To>
                     <Assign.Value>
-                      <InArgument x:TypeArguments="x:Double">[Math.Round(CDbl(originalDataTable.Rows(currentRowIndex)(index)), 2)]</InArgument>
+                      <InArgument x:TypeArguments="x:Double">[Math.Round(CDbl(originalDataTable.Rows(currentRowIndex)(index).ToString.Replace(" ", "")), 2)]</InArgument>
                     </Assign.Value>
                   </Assign>
                   <Assign sap2010:WorkflowViewState.IdRef="Assign_9">
@@ -142,9 +142,9 @@
                 </Catch>
               </TryCatch.Catches>
             </TryCatch>
-            <If Condition="[True.Equals(isOriginalTableValueCorrect) and roundedExtractedDataValue.Equals(Math.Round(CDbl(ExtractDataTable.Rows(searchIndex)(0).ToString().Replace(&quot;,&quot;, &quot;.&quot;)), 2))]" sap2010:WorkflowViewState.IdRef="If_3">
+            <If Condition="[True.Equals(isOriginalTableValueCorrect) and roundedExtractedDataValue.Equals(Math.Round(CDbl(ExtractDataTable.Rows(searchIndex)(0).ToString().Replace(&quot;,&quot;, &quot;.&quot;).Replace(&quot; &quot;, &quot;&quot;)), 2))]" sap2010:WorkflowViewState.IdRef="If_3">
               <If.Then>
-                <ui:LogMessage DisplayName="Log Message" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Fatal" Message="[&quot;Прошли валидацию&quot;]" />
+                <ui:LogMessage DisplayName="Log Message" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Прошли валидацию&quot;]" />
               </If.Then>
               <If.Else>
                 <ui:LogMessage DisplayName="Log Message" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Error" Message="[&quot;НЕ ПРОШЛИ ВАЛИДАЦИЮ&quot;]" />
@@ -173,7 +173,7 @@
                         <OutArgument x:TypeArguments="x:Double">[roundedExtractedDataValue]</OutArgument>
                       </Assign.To>
                       <Assign.Value>
-                        <InArgument x:TypeArguments="x:Double">[Math.Round(CDbl(ExtractDataTable.Rows(searchIndex)(0).ToString().Replace(",", ".")), 2)]</InArgument>
+                        <InArgument x:TypeArguments="x:Double">[Math.Round(CDbl(ExtractDataTable.Rows(searchIndex)(0).ToString().Replace(",", ".").Replace(" ", "")), 2)]</InArgument>
                       </Assign.Value>
                     </Assign>
                     <Assign sap2010:WorkflowViewState.IdRef="Assign_6">
@@ -233,7 +233,7 @@
         </Sequence>
       </If.Else>
     </If>
-    <sads:DebugSymbol.Symbol>dyhFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0VXBkYXRlRGF0YS54YW1sOUwD7QEOAgEBTQXrAQoCAQJNE01ZAgEDTwlPrQECAUlSCekBFAIBBE93T6oBAgFKVwteFAIBRF8LZCMCAT5lC5kBFgIBKZoBC6EBFAIBJKIBC+gBEwIBBVw1XEECAUdZNlk9AgFFYUlhWgIBQmJGYlMCAUBfwgFf2AECAT9qDZABGAIBMJEBDZgBEgIBKp8BNZ8BRgIBJ5wBNpwBQwIBJaMBDecBGAIBB6IBRqIBdgIBBmwRfRwCATWFARWMAR4CATGRARuRAdkBAgErkwERkwGiAQIBLpYBEZYBpQECASyoAQ/OARoCARbPAQ/WARgCARLXAQ/eARgCAQ3fAQ/mARgCAQhtE3QcAgE6dRN8HAIBNooBQYoBRgIBNIcBQocBXwIBMpMBf5MBnwECAS+WAX+WAaIBAgEtqgETuwEeAgEbwwEXygEgAgEX1AE61AFVAgEU0QE70QFrAgET3AE53AFEAgEQ2QE62QFBAgEO5AE55AFKAgEL4QE64QFHAgEJcj5ygwECAT1vP29aAgE7ej96QwIBOXdAd10CATerARWyAR4CASCzARW6AR4CARzIAUPIAUgCARrFAUTFAWECARiwAUCwAZkBAgEjrQFBrQFcAgEhuAFBuAFFAgEftQFCtQFfAgEd</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dyhFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0VXBkYXRlRGF0YS54YW1sOUwD7QEOAgEBTQXrAQoCAQJNE01ZAgEDTwlPrQECAUlSCekBFAIBBE93T6oBAgFKVwteFAIBRF8LZCMCAT5lC5kBFgIBKZoBC6EBFAIBJKIBC+gBEwIBBVw1XEECAUdZNlk9AgFFYUlhWgIBQmJGYlMCAUBfwgFf2AECAT9qDZABGAIBMJEBDZgBEgIBKp8BNZ8BRgIBJ5wBNpwBQwIBJaMBDecBGAIBB6IBRqIBdgIBBmwRfRwCATWFARWMAR4CATGRARuRAf4BAgErkwERkwGhAQIBLpYBEZYBpQECASyoAQ/OARoCARbPAQ/WARgCARLXAQ/eARgCAQ3fAQ/mARgCAQhtE3QcAgE6dRN8HAIBNooBQYoBRgIBNIcBQocBXwIBMpMBfpMBngECAS+WAX+WAaIBAgEtqgETuwEeAgEbwwEXygEgAgEX1AE61AFVAgEU0QE70QFrAgET3AE53AFEAgEQ2QE62QFBAgEO5AE55AFKAgEL4QE64QFHAgEJcj5ynQECAT1vP29aAgE7ej96QwIBOXdAd10CATerARWyAR4CASCzARW6AR4CARzIAUPIAUgCARrFAUTFAWECARiwAUCwAaoBAgEjrQFBrQFcAgEhuAFBuAFFAgEftQFCtQFfAgEd</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
