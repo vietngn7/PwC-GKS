@@ -60,7 +60,6 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Flowchart DisplayName="MainFlow" sap2010:WorkflowViewState.IdRef="Flowchart_1">
@@ -89,33 +88,29 @@
               </ui:InvokeWorkflowFile.Arguments>
             </ui:InvokeWorkflowFile>
             <FlowStep.Next>
-              <FlowStep x:Name="__ReferenceID5">
-                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" Text="[paramsTableRange]" TopMost="True" sap2010:WorkflowViewState.IdRef="MessageBox_2" />
+              <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_8">
+                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Sequence to process the data table and to call browers.&#xA;&#xA;INPUT   : DataTable from previous step&#xA;OUTPUT: Updated DataTable with new values" DisplayName="DataTable Processing" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="DataProccessingSeq.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dt">[paramsDataTable]</InOutArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
                 <FlowStep.Next>
-                  <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_8">
-                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Sequence to process the data table and to call browers.&#xA;&#xA;INPUT   : DataTable from previous step&#xA;OUTPUT: Updated DataTable with new values" DisplayName="DataTable Processing" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="DataProccessingSeq.xaml">
+                  <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_9">
+                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke StWriteDataToExcel workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="StWriteDataToExcel.xaml">
                       <ui:InvokeWorkflowFile.Arguments>
-                        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dt">[paramsDataTable]</InOutArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="resPath">[configFilePath]</InArgument>
+                        <InArgument x:TypeArguments="sd:DataTable" x:Key="updatedDataTable">[paramsDataTable]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="sheetName">NewParams</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="tableRange">[paramsTableRange]</InArgument>
                       </ui:InvokeWorkflowFile.Arguments>
                     </ui:InvokeWorkflowFile>
                     <FlowStep.Next>
-                      <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_9">
-                        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke StWriteDataToExcel workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="StWriteDataToExcel.xaml">
-                          <ui:InvokeWorkflowFile.Arguments>
-                            <InArgument x:TypeArguments="x:String" x:Key="resPath">[configFilePath]</InArgument>
-                            <InArgument x:TypeArguments="sd:DataTable" x:Key="updatedDataTable">[paramsDataTable]</InArgument>
-                          </ui:InvokeWorkflowFile.Arguments>
-                        </ui:InvokeWorkflowFile>
-                        <FlowStep.Next>
-                          <FlowStep x:Name="__ReferenceID4" sap2010:WorkflowViewState.IdRef="FlowStep_10">
-                            <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Робот закончил свою работу!&quot;]" TopMost="True" />
-                          </FlowStep>
-                        </FlowStep.Next>
+                      <FlowStep x:Name="__ReferenceID4" sap2010:WorkflowViewState.IdRef="FlowStep_10">
+                        <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Робот закончил свою работу!&quot;]" TopMost="True" />
                       </FlowStep>
                     </FlowStep.Next>
                   </FlowStep>
                 </FlowStep.Next>
-                <sap2010:WorkflowViewState.IdRef>FlowStep_11</sap2010:WorkflowViewState.IdRef>
               </FlowStep>
             </FlowStep.Next>
           </FlowStep>
@@ -127,8 +122,7 @@
     <x:Reference>__ReferenceID2</x:Reference>
     <x:Reference>__ReferenceID3</x:Reference>
     <x:Reference>__ReferenceID4</x:Reference>
-    <x:Reference>__ReferenceID5</x:Reference>
-    <sads:DebugSymbol.Symbol>dzVcXE1hY1xIb21lXERvd25sb2Fkc1xVaVBhdGhcUHdDLUdLU1xHS1NcTWFpbkZsb3cueGFtbBdCA4QBDwIBAUoJTyECARtSDVolAgERXRFdzAECAQ5gFWQtAgEKZxlsMQIBBG8db+8BAgECTUxNXAIBHkxGTFECAR1KwwFK3AECARxUT1RfAgEZV1VXZgIBF1ZQVlkCARZVUFVZAgEVWFJYZAIBE1KIBFKfBAIBEl13XYsBAgEPYlJiYwIBDGD7AmCUAwIBC2lUaWQCAQhqYWpyAgEGZ9MBZ+wBAgEFb7IBb90BAgED</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzVcXG1hY1xIb21lXERvd25sb2Fkc1xVaVBhdGhcUHdDLUdLU1xHS1NcTWFpbkZsb3cueGFtbBdBA34PAgEBSQlOIQIBG1ENWSUCARFcEWApAgENYxVqLQIBBG0ZbesBAgECTExMXAIBHktGS1ECAR1JwwFJ3AECARxTT1NfAgEZVlVWZgIBF1VQVVkCARZUUFRZAgEVV1JXZAIBE1GIBFGfBAIBEl5OXl8CAQ9c9wJckAMCAQ5lUGVgAgELaFNoZQIBCWdSZ1sCAQhmXWZuAgEGY88BY+gBAgEFba4BbdkBAgED</sads:DebugSymbol.Symbol>
   </Flowchart>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -137,14 +131,6 @@
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="MessageBox_2" sap:VirtualizedContainerService.HintSize="200,52">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -199,21 +185,12 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="FlowStep_11">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">430,414</av:Point>
-            <av:Size x:Key="ShapeSize">200,52</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">530,466 530,697.6 180,697.6 180,461.6 300,461.6 300,491.6</av:PointCollection>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_6">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">200,183.6</av:Point>
             <av:Size x:Key="ShapeSize">200,272</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">300,455.6 300,474 170,474 170,84 530,84 530,414</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">300,455.6 300,491.6</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
