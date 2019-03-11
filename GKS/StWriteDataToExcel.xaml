@@ -47,6 +47,7 @@
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
       <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -82,6 +83,20 @@
       <Variable x:TypeArguments="x:String" Name="dataCell" />
       <Variable x:TypeArguments="x:Int32" Name="beginRow" />
     </Sequence.Variables>
+    <If Condition="[outputPath(outputPath.Length - 1) = &quot;\&quot;]">
+      <If.Else>
+        <Assign>
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:String">[outputPath]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:String">[outputPath + "\"]</InArgument>
+          </Assign.Value>
+          <sap2010:WorkflowViewState.IdRef>Assign_9</sap2010:WorkflowViewState.IdRef>
+        </Assign>
+      </If.Else>
+      <sap2010:WorkflowViewState.IdRef>If_2</sap2010:WorkflowViewState.IdRef>
+    </If>
     <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[path]</OutArgument>
@@ -187,14 +202,16 @@
         </ActivityAction>
       </ui:ExcelApplicationScope.Body>
     </ui:ExcelApplicationScope>
-    <sads:DebugSymbol.Symbol>dz9cXE1hY1xIb21lXERvd25sb2Fkc1xVaVBhdGhcUHdDLUdLU1xHS1NcU3RXcml0ZURhdGFUb0V4Y2VsLnhhbWw9AWsBfgECTQO/AQ4CAQFVBVwOAgFXXQVdrgECAVJeBb0BIAIBAlowWlECAVpXMVc3AgFYXTldQQIBVV2dAV2rAQIBU162AV6+AQIBUGQLugEWAgEDaA1vFgIBTHANdxYCAUh4DX8WAgFEgAENgAHVAQIBPYEBDYEBygECATiCAQ2JARYCATOKAQ2KAagBAgEtiwENkgEWAgEokwENuQEaAgEEbThtUwIBT2o5aj8CAU11N3VNAgFLcjhyQgIBSX04fWUCAUd6OXpDAgFFgAHGAYAB0gECAUKAAT6AAVICAUCAAasBgAG4AQIBPoEBrAGBAa8BAgE8gQGfAYEBogECATuBAboBgQHHAQIBOYcBOIcBTAIBNoQBOYQBRQIBNIoBJYoBMwIBMYoBnQGKAaUBAgEwigGKAYoBlwECAS6QATeQAUUCASuNATiNAUgCASmTAZgBkwGmAQIBJpkBE7YBHgIBBZ0BFaQBHgIBIaUBFaUBuwECARqmARWtARoCAQuuARW1AR4CAQaiAUCiAV0CASSfAUGfAU0CASKlAS2lATsCAR+lAaUBpQG4AQIBHaUBkgGlAZ8BAgEbpgEjpgFnAgEMqAEZqAHfAQIBFKsBGasB2wECAQ6zAT+zAVMCAQmwAUCwAVACAQeoATaoAVQCARmoAbYBqAHEAQIBF6gBzwGoAdwBAgEVqwE2qwFSAgETqwGyAasBwAECARGrAcsBqwHYAQIBDw==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dy5FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0V3JpdGVEYXRhVG9FeGNlbC54YW1sQgFrAX4BAk4DzgEOAgEBVgVjCgIBXGQFaw4CAVdsBWyuAQIBUm0FzAEgAgECVhNWSAIBXVgJYBICAWBpMGlRAgFaZjFmNwIBWGw5bEECAVVsnQFsqwECAVNttgFtvgECAVBzC8kBFgIBA100XUYCAWNaNVpBAgFhdw1+FgIBTH8NhgEWAgFIhwENjgEWAgFEjwENjwHVAQIBPZABDZABygECATiRAQ2YARYCATOZAQ2ZAagBAgEtmgENoQEWAgEoogENyAEaAgEEfDh8UwIBT3k5eT8CAU2EATeEAU0CAUuBATiBAUICAUmMATiMAWUCAUeJATmJAUMCAUWPAcYBjwHSAQIBQo8BPo8BUgIBQI8BqwGPAbgBAgE+kAGsAZABrwECATyQAZ8BkAGiAQIBO5ABugGQAccBAgE5lgE4lgFMAgE2kwE5kwFFAgE0mQElmQEzAgExmQGdAZkBpQECATCZAYoBmQGXAQIBLp8BN58BRQIBK5wBOJwBSAIBKaIBmAGiAaYBAgEmqAETxQEeAgEFrAEVswEeAgEhtAEVtAG7AQIBGrUBFbwBGgIBC70BFcQBHgIBBrEBQLEBXQIBJK4BQa4BTQIBIrQBLbQBOwIBH7QBpQG0AbgBAgEdtAGSAbQBnwECARu1ASO1AWcCAQy3ARm3Ad8BAgEUugEZugHbAQIBDsIBP8IBUwIBCb8BQL8BUAIBB7cBNrcBVAIBGbcBtgG3AcQBAgEXtwHPAbcB3AECARW6ATa6AVICARO6AbIBugHAAQIBEboBywG6AdgBAgEP</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="538,60" />
-      <sap2010:ViewStateData Id="CopyFile_1" sap:VirtualizedContainerService.HintSize="538,22" />
-      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="502,60" />
-      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="502,60" />
+      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="243.2,60" />
+      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="539.2,209.6" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="539.2,60" />
+      <sap2010:ViewStateData Id="CopyFile_1" sap:VirtualizedContainerService.HintSize="539.2,22.4" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="502.4,60" />
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="502.4,60" />
       <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="502,60" />
       <sap2010:ViewStateData Id="ExcelWriteRange_1" sap:VirtualizedContainerService.HintSize="502,87" />
       <sap2010:ViewStateData Id="ExcelInsertDeleteColumns_1" sap:VirtualizedContainerService.HintSize="502,22" />
@@ -215,22 +232,22 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="ForEach`1_1" sap:VirtualizedContainerService.HintSize="502,794" />
-      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="524,1734">
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="524.8,1735.2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="538,1843" />
-      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="560,2129">
+      <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="539.2,1844.8" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="561.6,2381.6">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="StWriteDataToExcel_1" sap:VirtualizedContainerService.HintSize="600,2209">
+      <sap2010:ViewStateData Id="StWriteDataToExcel_1" sap:VirtualizedContainerService.HintSize="601.6,2461.6">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
