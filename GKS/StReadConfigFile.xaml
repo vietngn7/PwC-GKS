@@ -1,4 +1,4 @@
-﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="StReadConfigFile"
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="StReadConfigFile" this:StReadConfigFile.paramsOutputTable="FileOutput"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
  xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
@@ -9,6 +9,7 @@
  xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
  xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
  xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:this="clr-namespace:"
  xmlns:ui="http://schemas.uipath.com/workflow/activities"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
@@ -17,6 +18,8 @@
     <x:Property Name="paramsSheetName" Type="InArgument(x:String)" />
     <x:Property Name="paramsDataTable" Type="OutArgument(sd:DataTable)" />
     <x:Property Name="paramsTableRange" Type="OutArgument(x:String)" />
+    <x:Property Name="paramsOutputPath" Type="OutArgument(x:String)" />
+    <x:Property Name="paramsOutputTable" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
@@ -45,6 +48,7 @@
       <x:String>System.Windows.Markup</x:String>
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -68,6 +72,7 @@
       <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="StReadConfigFile" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -85,8 +90,22 @@
                 </ActivityAction.Argument>
                 <Sequence sap2010:WorkflowViewState.IdRef="Sequence_3">
                   <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="temp" />
+                      <Variable x:TypeArguments="sd:DataTable" Name="tempDT" />
+                    </Sequence.Variables>
                     <ui:ExcelGetTableRange DisplayName="Get Table Range" sap2010:WorkflowViewState.IdRef="ExcelGetTableRange_1" IsPivot="False" Range="[paramsTableRange]" SheetName="[paramsSheetName]" TableName="[paramsTableName]" />
                     <ui:ExcelReadRange AddHeaders="True" DataTable="[paramsDataTable]" DisplayName="Read Range" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" Range="[paramsTableRange]" SheetName="[paramsSheetName]" />
+                    <ui:ExcelGetTableRange DisplayName="Get Table Range. To get output path" sap2010:WorkflowViewState.IdRef="ExcelGetTableRange_2" IsPivot="False" Range="[temp]" SheetName="[paramsSheetName]" TableName="[paramsOutputTable]" />
+                    <ui:ExcelReadRange AddHeaders="False" DataTable="[tempDT]" DisplayName="Read Range" sap2010:WorkflowViewState.IdRef="ExcelReadRange_2" Range="[temp]" SheetName="[paramsSheetName]" />
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[paramsOutputPath]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[tempDT(0)(1).ToString]</InArgument>
+                      </Assign.Value>
+                    </Assign>
                   </Sequence>
                   <Assign sap2010:WorkflowViewState.IdRef="Assign_1">
                     <Assign.To>
@@ -113,13 +132,16 @@
         </TryCatch.Catches>
       </TryCatch>
     </DoWhile>
-    <sads:DebugSymbol.Symbol>dz1cXE1hY1xIb21lXERvd25sb2Fkc1xVaVBhdGhcUHdDLUdLU1xHS1NcU3RSZWFkQ29uZmlnRmlsZS54YW1sFkkDdQ4CAQFLNUs8AgECTQVzDwIBA01bTXYCAR5OB3ISAgEEUAtmJgIBB24PbqEBAgEFULwBUM4BAgEcVhFjHAIBCG5mbp4BAgEGVxNaHgIBDVsTYhwCAQlYFVjqAQIBFVkVWd8BAgEOYD9gQwIBDF1AXVUCAQpYlwFYqwECARpY1AFY5wECARhYtgFYyQECARZZRFlXAgETWaoBWb4BAgERWckBWdwBAgEP</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dz1cXE1hY1xIb21lXERvd25sb2Fkc1xVaVBhdGhcUHdDLUdLU1xHS1NcU3RSZWFkQ29uZmlnRmlsZS54YW1sIgFuAXkBAk4DiAEOAgEBUDVQPAIBAlIFhgEPAgEDUltSdgIBMFMHhQESAgEEVQt5JgIBB4EBD4EBoQECAQVVvAFVzgECAS5bEXYcAgEIgQFmgQGeAQIBBlwTbR4CAQ1uE3UcAgEJYRVh6gECASdiFWLfAQIBIGMVY/QBAgEZZBVkywECARJlFWweAgEOcz9zQwIBDHBAcFUCAQphlwFhqwECASxh1AFh5wECASphtgFhyQECAShiRGJXAgElYqoBYr4BAgEjYskBYtwBAgEhY6sBY7MBAgEeY9wBY/EBAgEcY74BY9EBAgEaZEVkTwIBF2SiAWSqAQIBFWS1AWTIAQIBE2pAalcCARFnQWdTAgEP</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
       <sap2010:ViewStateData Id="ExcelGetTableRange_1" sap:VirtualizedContainerService.HintSize="314,59" />
       <sap2010:ViewStateData Id="ExcelReadRange_1" sap:VirtualizedContainerService.HintSize="314,59" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="336,282">
+      <sap2010:ViewStateData Id="ExcelGetTableRange_2" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="ExcelReadRange_2" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="314,60" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="336,580">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -127,14 +149,14 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="336,60" />
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="358,506">
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="358,804">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="414,615" />
+      <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="414,913" />
       <sap2010:ViewStateData Id="WriteLine_1" sap:VirtualizedContainerService.HintSize="210.5,62" />
       <sap2010:ViewStateData Id="Catch`1_2" sap:VirtualizedContainerService.HintSize="418,22">
         <sap:WorkflowViewStateService.ViewState>
@@ -144,16 +166,16 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="432,847" />
-      <sap2010:ViewStateData Id="DoWhile_1" sap:VirtualizedContainerService.HintSize="464,1011" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="486,1135">
+      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="432,1145" />
+      <sap2010:ViewStateData Id="DoWhile_1" sap:VirtualizedContainerService.HintSize="464,1309" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="486,1433">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="StReadConfigFile_1" sap:VirtualizedContainerService.HintSize="526,1215" />
+      <sap2010:ViewStateData Id="StReadConfigFile_1" sap:VirtualizedContainerService.HintSize="526,1513" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
