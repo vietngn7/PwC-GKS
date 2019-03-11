@@ -71,6 +71,7 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="StWriteDataToExcel" sap2010:WorkflowViewState.IdRef="Sequence_4">
@@ -86,7 +87,7 @@
         <OutArgument x:TypeArguments="x:String">[path]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[outputPath + "-RESULT.xlsx"]</InArgument>
+        <InArgument x:TypeArguments="x:String">[outputPath + "GKS. RESULT.xlsx"]</InArgument>
       </Assign.Value>
     </Assign>
     <ui:CopyFile ContinueOnError="{x:Null}" Destination="[path]" DisplayName="Copy File" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="[originPath]" />
@@ -186,7 +187,7 @@
         </ActivityAction>
       </ui:ExcelApplicationScope.Body>
     </ui:ExcelApplicationScope>
-    <sads:DebugSymbol.Symbol>dz9cXE1hY1xIb21lXERvd25sb2Fkc1xVaVBhdGhcUHdDLUdLU1xHS1NcU3RXcml0ZURhdGFUb0V4Y2VsLnhhbWw9AWsBfgECTAO+AQ4CAQFUBVsOAgFXXAVcrgECAVJdBbwBIAIBAlkwWU0CAVpWMVY3AgFYXDlcQQIBVVydAVyrAQIBU122AV2+AQIBUGMLuQEWAgEDZw1uFgIBTG8NdhYCAUh3DX4WAgFEfw1/1QECAT2AAQ2AAcoBAgE4gQENiAEWAgEziQENiQGoAQIBLYoBDZEBFgIBKJIBDbgBGgIBBGw4bFMCAU9pOWk/AgFNdDd0TQIBS3E4cUICAUl8OHxlAgFHeTl5QwIBRX/GAX/SAQIBQn8+f1ICAUB/qwF/uAECAT6AAawBgAGvAQIBPIABnwGAAaIBAgE7gAG6AYABxwECATmGATiGAUwCATaDATmDAUUCATSJASWJATMCATGJAZ0BiQGlAQIBMIkBigGJAZcBAgEujwE3jwFFAgErjAE4jAFIAgEpkgGYAZIBpgECASaYARO1AR4CAQWcARWjAR4CASGkARWkAbsBAgEapQEVrAEaAgELrQEVtAEeAgEGoQFAoQFdAgEkngFBngFNAgEipAEtpAE7AgEfpAGlAaQBuAECAR2kAZIBpAGfAQIBG6UBI6UBZwIBDKcBGacB3wECARSqARmqAdsBAgEOsgE/sgFTAgEJrwFArwFQAgEHpwE2pwFUAgEZpwG2AacBxAECARenAc8BpwHcAQIBFaoBNqoBUgIBE6oBsgGqAcABAgERqgHLAaoB2AECAQ8=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dz9cXE1hY1xIb21lXERvd25sb2Fkc1xVaVBhdGhcUHdDLUdLU1xHS1NcU3RXcml0ZURhdGFUb0V4Y2VsLnhhbWw9AWsBfgECTQO/AQ4CAQFVBVwOAgFXXQVdrgECAVJeBb0BIAIBAlowWlECAVpXMVc3AgFYXTldQQIBVV2dAV2rAQIBU162AV6+AQIBUGQLugEWAgEDaA1vFgIBTHANdxYCAUh4DX8WAgFEgAENgAHVAQIBPYEBDYEBygECATiCAQ2JARYCATOKAQ2KAagBAgEtiwENkgEWAgEokwENuQEaAgEEbThtUwIBT2o5aj8CAU11N3VNAgFLcjhyQgIBSX04fWUCAUd6OXpDAgFFgAHGAYAB0gECAUKAAT6AAVICAUCAAasBgAG4AQIBPoEBrAGBAa8BAgE8gQGfAYEBogECATuBAboBgQHHAQIBOYcBOIcBTAIBNoQBOYQBRQIBNIoBJYoBMwIBMYoBnQGKAaUBAgEwigGKAYoBlwECAS6QATeQAUUCASuNATiNAUgCASmTAZgBkwGmAQIBJpkBE7YBHgIBBZ0BFaQBHgIBIaUBFaUBuwECARqmARWtARoCAQuuARW1AR4CAQaiAUCiAV0CASSfAUGfAU0CASKlAS2lATsCAR+lAaUBpQG4AQIBHaUBkgGlAZ8BAgEbpgEjpgFnAgEMqAEZqAHfAQIBFKsBGasB2wECAQ6zAT+zAVMCAQmwAUCwAVACAQeoATaoAVQCARmoAbYBqAHEAQIBF6gBzwGoAdwBAgEVqwE2qwFSAgETqwGyAasBwAECARGrAcsBqwHYAQIBDw==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
