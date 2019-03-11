@@ -69,7 +69,6 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Interop</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="This sequence is to process each row and to invoke specific workflow for that row.&#xA;&#xA;INPUT   : DataTable dt&#xA;OUTPUT: Updated DataTable with updated values&#xA;&#xA;TODO:&#xA;1. Подумать как реализовать проход по всем строкам.&#xA;2. Какие аргументы у workflow&#xA;3. Как обновлять данные в табличке&#xA;&#xA;" DisplayName="DataProccessingSeq" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -107,7 +106,7 @@
         <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dt">[dt]</InOutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:OpenBrowser BrowserType="Chrome" DisplayName="Open Browser" Hidden="False" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" NewSession="False" Private="False" UiBrowser="[rbaBrowser]" Url="www.yandex.ru">
+    <ui:OpenBrowser BrowserType="IE" DisplayName="Open Browser" Hidden="False" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" NewSession="False" Private="False" UiBrowser="[rbaBrowser]" Url="www.yandex.ru">
       <ui:OpenBrowser.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
@@ -172,7 +171,7 @@
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
-    <sads:DebugSymbol.Symbol>dy5FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXERhdGFQcm9jY2Vzc2luZ1NlcS54YW1sMUsDsAEOAgEBUQVYDgIBRVkFYA4CAUFhBWgOAgE9aQVtHQIBOW4FrgEWAgECVi9WRQIBSFMwUzsCAUZeMF5SAgFEWzFbQAIBQmY6Zk8CAUBjO2NHAgE+a0JrRgIBO2nCAWneAQIBOm6xAW6/AQIBN27EAW7TAQIBNnQLqwEWAgEDdQ2pARgCAQWqAQ2qAYYBAgEEeQ+oAR8CAQZ5K3k+AgE0eUl5TwIBMn8VpQEgAgEHgQFKgQFpAgEIhAEXmQEcAgEcmgEXowEvAgEOpAEXpAHMAQIBCYQBJYQBWAIBHYYBG40BMwIBKJABG5cBMwIBHp8BY58BZwIBGqABWaABagIBGJwBX5wBbgIBFp4BVJ4BXwIBFJ0BWp0BaQIBEqEBVqEBZQIBEJoB4QGaAfQBAgEPpAFOpAFcAgEMpAG4AaQByQECAQqJAViJAWQCATCIAVeIAVwCAS6KAWSKAXMCASyLAVqLAWkCASqGAd8BhgHtAQIBKZMBWJMBZAIBJpIBV5IBXAIBJJQBZJQBcwIBIpUBWpUBaQIBIJAB2wGQAeUBAgEf</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dy5FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXERhdGFQcm9jY2Vzc2luZ1NlcS54YW1sMUoDrwEOAgEBUAVXDgIBRVgFXw4CAUFgBWcOAgE9aAVsHQIBOW0FrQEWAgECVS9VRQIBSFIwUjsCAUZdMF1SAgFEWjFaQAIBQmU6ZU8CAUBiO2JHAgE+akJqRgIBO2jCAWjeAQIBOm2tAW27AQIBN23AAW3PAQIBNnMLqgEWAgEDdA2oARgCAQWpAQ2pAYYBAgEEeA+nAR8CAQZ4K3g+AgE0eEl4TwIBMn4VpAEgAgEHgAFKgAFpAgEIgwEXmAEcAgEcmQEXogEvAgEOowEXowHMAQIBCYMBJYMBWAIBHYUBG4wBMwIBKI8BG5YBMwIBHp4BY54BZwIBGp8BWZ8BagIBGJsBX5sBbgIBFp0BVJ0BXwIBFJwBWpwBaQIBEqABVqABZQIBEJkB4QGZAfQBAgEPowFOowFcAgEMowG4AaMByQECAQqIAViIAWQCATCHAVeHAVwCAS6JAWSJAXMCASyKAVqKAWkCASqFAd8BhQHtAQIBKZIBWJIBZAIBJpEBV5EBXAIBJJMBZJMBcwIBIpQBWpQBaQIBII8B2wGPAeUBAgEf</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -224,7 +223,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="DataProccessingSeq_1" sap:VirtualizedContainerService.HintSize="828,1974.4">
+      <sap2010:ViewStateData Id="DataProccessingSeq_1" sap:VirtualizedContainerService.HintSize="828,1934.4">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>

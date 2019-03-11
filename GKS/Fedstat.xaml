@@ -69,6 +69,7 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Fedstat" sap2010:WorkflowViewState.IdRef="Sequence_3">
@@ -96,7 +97,7 @@
             <ui:NavigateTo Browser="{x:Null}" DisplayName="Navigate To" sap2010:WorkflowViewState.IdRef="NavigateTo_1" Url="[url]" />
             <ui:UiElementExists DisplayName="Element Exists 'chrome.exe Chrome'" Exists="[pageLoadedProperly]" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
               <ui:UiElementExists.Target>
-                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="151b40fc82ecc13800d85e183848b234" Selector="&lt;html app='chrome.exe' omit:title='ЕМИСС' /&gt;&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div' idx='4' tag='DIV' /&gt;" TimeoutMS="60000" WaitForReady="COMPLETE" />
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="80728024b78a4fc7d080e2cb3d040194" Selector="&lt;html title='ЕМИСС' /&gt;&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;span' tag='SPAN' /&gt;" TimeoutMS="60000" WaitForReady="COMPLETE" />
               </ui:UiElementExists.Target>
             </ui:UiElementExists>
             <If Condition="[pageLoadedProperly]" sap2010:WorkflowViewState.IdRef="If_1">
@@ -124,7 +125,7 @@
                             </ui:CursorPosition>
                           </ui:Click.CursorPosition>
                           <ui:Click.Target>
-                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="356ccbb0a7eda37af1eae1a2a3d679fc" Selector="&lt;webctrl parentid='JColResizer0' tableCol='1' tag='SPAN' /&gt;" WaitForReady="COMPLETE" />
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="5a1369536ea66acaf302e9b4a0fd0bec" Selector="&lt;html title='ЕМИСС' /&gt;&lt;webctrl idx='1' parentid='JColResizer0' tag='SPAN' /&gt;" WaitForReady="COMPLETE" />
                           </ui:Click.Target>
                         </ui:Click>
                         <ui:Click DelayBefore="{x:Null}" ClickType="CLICK_SINGLE" DelayMS="1000" DisplayName="Click 'Clear Button'" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
@@ -139,7 +140,7 @@
                             </ui:CursorPosition>
                           </ui:Click.CursorPosition>
                           <ui:Click.Target>
-                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="38a71fd70f3682911e260c1b92995ae0" Selector="&lt;webctrl parentid='grid' tag='BUTTON' type='button' /&gt;" WaitForReady="COMPLETE" />
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="65fd1da577a6d89cfe80c9fd6868bdbe" Selector="&lt;html title='ЕМИСС' /&gt;&lt;webctrl parentid='grid' tag='BUTTON' type='button' /&gt;" WaitForReady="COMPLETE" />
                           </ui:Click.Target>
                         </ui:Click>
                         <Assign sap2010:WorkflowViewState.IdRef="Assign_2">
@@ -155,7 +156,7 @@
                             <OutArgument x:TypeArguments="x:String">[selector]</OutArgument>
                           </Assign.To>
                           <Assign.Value>
-                            <InArgument x:TypeArguments="x:String">["&lt;html app='chrome.exe' title='ЕМИСС' /&gt;&lt;webctrl aaname='" +val+"' parentid='grid' tag='LABEL' /&gt;"]</InArgument>
+                            <InArgument x:TypeArguments="x:String">["&lt;html title='ЕМИСС' /&gt;&lt;webctrl aaname='" +val+"' parentid='grid' tag='LABEL' /&gt;"]</InArgument>
                           </Assign.Value>
                         </Assign>
                         <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'LABEL'" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
@@ -185,7 +186,7 @@
                             </ui:CursorPosition>
                           </ui:Click.CursorPosition>
                           <ui:Click.Target>
-                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="5aef4feba6c57450462d19d5ed58d31b" Selector="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;form' parentid='grid' tag='FORM' /&gt;&lt;webctrl parentid='grid' tag='BUTTON' type='submit' /&gt;" WaitForReady="COMPLETE" />
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="c2d94efb1a165624ca72313b6a1acec1" Selector="&lt;html title='ЕМИСС' /&gt;&lt;webctrl parentid='grid' tag='BUTTON' type='submit' /&gt;" WaitForReady="COMPLETE" />
                           </ui:Click.Target>
                         </ui:Click>
                       </Sequence>
@@ -206,7 +207,7 @@
                             </ui:CursorPosition>
                           </ui:Click.CursorPosition>
                           <ui:Click.Target>
-                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="356ccbb0a7eda37af1eae1a2a3d679fc" Selector="&lt;html app='chrome.exe' title='ЕМИСС' /&gt;&lt;webctrl parentid='JColResizer1' tableCol='2' tag='SPAN' /&gt;" WaitForReady="INTERACTIVE" />
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="cffc3c8dea907f6a82e8660888214358" Selector="&lt;html title='ЕМИСС' /&gt;&lt;webctrl parentid='JColResizer1' tableCol='2' tag='SPAN' /&gt;" WaitForReady="INTERACTIVE" />
                           </ui:Click.Target>
                         </ui:Click>
                         <ui:Click DelayBefore="{x:Null}" ClickType="CLICK_SINGLE" DelayMS="1000" DisplayName="Click 'Clear Button'" sap2010:WorkflowViewState.IdRef="Click_6" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
@@ -221,7 +222,7 @@
                             </ui:CursorPosition>
                           </ui:Click.CursorPosition>
                           <ui:Click.Target>
-                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="38a71fd70f3682911e260c1b92995ae0" Selector="&lt;html app='chrome.exe' title='ЕМИСС' /&gt;&lt;webctrl parentid='grid' tag='BUTTON' type='button' /&gt;" WaitForReady="COMPLETE" />
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="47a3debde9e1f0f583752c54e9746e19" Selector="&lt;html title='ЕМИСС' /&gt;&lt;webctrl parentid='grid' tag='BUTTON' type='button' /&gt;" WaitForReady="COMPLETE" />
                           </ui:Click.Target>
                         </ui:Click>
                         <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
@@ -237,7 +238,7 @@
                             <OutArgument x:TypeArguments="x:String">[selector]</OutArgument>
                           </Assign.To>
                           <Assign.Value>
-                            <InArgument x:TypeArguments="x:String">["&lt;html app='chrome.exe' title='ЕМИСС' /&gt;&lt;webctrl aaname='"+val+"' parentid='grid' tag='LABEL' /&gt;"]</InArgument>
+                            <InArgument x:TypeArguments="x:String">["&lt;html title='ЕМИСС' /&gt;&lt;webctrl aaname='"+val+"' parentid='grid' tag='LABEL' /&gt;"]</InArgument>
                           </Assign.Value>
                         </Assign>
                         <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'LABEL'" sap2010:WorkflowViewState.IdRef="Click_7" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
@@ -267,7 +268,7 @@
                             </ui:CursorPosition>
                           </ui:Click.CursorPosition>
                           <ui:Click.Target>
-                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="5aef4feba6c57450462d19d5ed58d31b" Selector="&lt;html app='chrome.exe' title='ЕМИСС' /&gt;&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;form' parentid='grid' tag='FORM' /&gt;&lt;webctrl parentid='grid' tag='BUTTON' type='submit' /&gt;" WaitForReady="COMPLETE" />
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="5aef4feba6c57450462d19d5ed58d31b" Selector="&lt;html title='ЕМИСС' /&gt;&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;form' parentid='grid' tag='FORM' /&gt;&lt;webctrl parentid='grid' tag='BUTTON' type='submit' /&gt;" WaitForReady="COMPLETE" />
                           </ui:Click.Target>
                         </ui:Click>
                       </Sequence>
@@ -288,7 +289,7 @@
                             </ui:CursorPosition>
                           </ui:Click.CursorPosition>
                           <ui:Click.Target>
-                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="356ccbb0a7eda37af1eae1a2a3d679fc" Selector="&lt;html app='chrome.exe' title='ЕМИСС' /&gt;&lt;webctrl parentid='JColResizer2' tableCol='3' tag='SPAN' /&gt;" WaitForReady="INTERACTIVE" />
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="356ccbb0a7eda37af1eae1a2a3d679fc" Selector="&lt;html title='ЕМИСС' /&gt;&lt;webctrl parentid='JColResizer2' tableCol='3' tag='SPAN' /&gt;" WaitForReady="INTERACTIVE" />
                           </ui:Click.Target>
                         </ui:Click>
                         <ui:Click DelayBefore="{x:Null}" ClickType="CLICK_SINGLE" DelayMS="1000" DisplayName="Click 'Clear Button'" sap2010:WorkflowViewState.IdRef="Click_11" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
@@ -303,7 +304,7 @@
                             </ui:CursorPosition>
                           </ui:Click.CursorPosition>
                           <ui:Click.Target>
-                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="38a71fd70f3682911e260c1b92995ae0" Selector="&lt;html app='chrome.exe' title='ЕМИСС' /&gt;&lt;webctrl parentid='grid' tag='BUTTON' type='button' /&gt;" WaitForReady="COMPLETE" />
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="38a71fd70f3682911e260c1b92995ae0" Selector="&lt;html title='ЕМИСС' /&gt;&lt;webctrl parentid='grid' tag='BUTTON' type='button' /&gt;" WaitForReady="COMPLETE" />
                           </ui:Click.Target>
                         </ui:Click>
                         <Assign sap2010:WorkflowViewState.IdRef="Assign_6">
@@ -319,7 +320,7 @@
                             <OutArgument x:TypeArguments="x:String">[selector]</OutArgument>
                           </Assign.To>
                           <Assign.Value>
-                            <InArgument x:TypeArguments="x:String">["&lt;html app='chrome.exe' title='ЕМИСС' /&gt;&lt;webctrl aaname='"+val+"' parentid='grid' tag='LABEL' /&gt;"]</InArgument>
+                            <InArgument x:TypeArguments="x:String">["&lt;html title='ЕМИСС' /&gt;&lt;webctrl aaname='"+val+"' parentid='grid' tag='LABEL' /&gt;"]</InArgument>
                           </Assign.Value>
                         </Assign>
                         <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'LABEL'" sap2010:WorkflowViewState.IdRef="Click_12" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
@@ -349,7 +350,7 @@
                             </ui:CursorPosition>
                           </ui:Click.CursorPosition>
                           <ui:Click.Target>
-                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="5aef4feba6c57450462d19d5ed58d31b" Selector="&lt;html app='chrome.exe' title='ЕМИСС' /&gt;&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;form' parentid='grid' tag='FORM' /&gt;&lt;webctrl parentid='grid' tag='BUTTON' type='submit' /&gt;" WaitForReady="COMPLETE" />
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="5aef4feba6c57450462d19d5ed58d31b" Selector="&lt;html title='ЕМИСС' /&gt;&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;form' parentid='grid' tag='FORM' /&gt;&lt;webctrl parentid='grid' tag='BUTTON' type='submit' /&gt;" WaitForReady="COMPLETE" />
                           </ui:Click.Target>
                         </ui:Click>
                       </Sequence>
@@ -370,7 +371,7 @@
                             </ui:CursorPosition>
                           </ui:Click.CursorPosition>
                           <ui:Click.Target>
-                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="356ccbb0a7eda37af1eae1a2a3d679fc" Selector="&lt;html app='chrome.exe' title='ЕМИСС' /&gt;&lt;webctrl parentid='JColResizer3' tableCol='4' tag='SPAN' /&gt;" WaitForReady="INTERACTIVE" />
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="356ccbb0a7eda37af1eae1a2a3d679fc" Selector="&lt;html title='ЕМИСС' /&gt;&lt;webctrl parentid='JColResizer3' tableCol='4' tag='SPAN' /&gt;" WaitForReady="INTERACTIVE" />
                           </ui:Click.Target>
                         </ui:Click>
                         <ui:Click DelayBefore="{x:Null}" ClickType="CLICK_SINGLE" DelayMS="1000" DisplayName="Click 'Clear Button'" sap2010:WorkflowViewState.IdRef="Click_15" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
@@ -385,7 +386,7 @@
                             </ui:CursorPosition>
                           </ui:Click.CursorPosition>
                           <ui:Click.Target>
-                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="38a71fd70f3682911e260c1b92995ae0" Selector="&lt;html app='chrome.exe' title='ЕМИСС' /&gt;&lt;webctrl parentid='grid' tag='BUTTON' type='button' /&gt;" WaitForReady="COMPLETE" />
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="38a71fd70f3682911e260c1b92995ae0" Selector="&lt;html title='ЕМИСС' /&gt;&lt;webctrl parentid='grid' tag='BUTTON' type='button' /&gt;" WaitForReady="COMPLETE" />
                           </ui:Click.Target>
                         </ui:Click>
                         <Assign sap2010:WorkflowViewState.IdRef="Assign_8">
@@ -401,7 +402,7 @@
                             <OutArgument x:TypeArguments="x:String">[selector]</OutArgument>
                           </Assign.To>
                           <Assign.Value>
-                            <InArgument x:TypeArguments="x:String">["&lt;html app='chrome.exe' title='ЕМИСС' /&gt;&lt;webctrl aaname='"+val+"' parentid='grid' tag='LABEL' /&gt;"]</InArgument>
+                            <InArgument x:TypeArguments="x:String">["&lt;html title='ЕМИСС' /&gt;&lt;webctrl aaname='"+val+"' parentid='grid' tag='LABEL' /&gt;"]</InArgument>
                           </Assign.Value>
                         </Assign>
                         <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'LABEL'" sap2010:WorkflowViewState.IdRef="Click_16" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
@@ -431,7 +432,7 @@
                             </ui:CursorPosition>
                           </ui:Click.CursorPosition>
                           <ui:Click.Target>
-                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="5aef4feba6c57450462d19d5ed58d31b" Selector="&lt;html app='chrome.exe' title='ЕМИСС' /&gt;&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;form' parentid='grid' tag='FORM' /&gt;&lt;webctrl parentid='grid' tag='BUTTON' type='submit' /&gt;" WaitForReady="COMPLETE" />
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="5aef4feba6c57450462d19d5ed58d31b" Selector="&lt;html title='ЕМИСС' /&gt;&lt;webctrl css-selector='body&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;form' parentid='grid' tag='FORM' /&gt;&lt;webctrl parentid='grid' tag='BUTTON' type='submit' /&gt;" WaitForReady="COMPLETE" />
                           </ui:Click.Target>
                         </ui:Click>
                       </Sequence>
@@ -450,18 +451,16 @@
                 </Sequence>
               </If.Then>
               <If.Else>
-                <Sequence>
+                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_16">
                   <ui:LogMessage DisplayName="Log Message" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Fatal" Message="[&quot;Веб-страница недоступна&quot;]" />
-                  <Assign>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_10">
                     <Assign.To>
                       <OutArgument x:TypeArguments="x:String">[statusLine]</OutArgument>
                     </Assign.To>
                     <Assign.Value>
                       <InArgument x:TypeArguments="x:String">Веб-страница недоступна</InArgument>
                     </Assign.Value>
-                    <sap2010:WorkflowViewState.IdRef>Assign_10</sap2010:WorkflowViewState.IdRef>
                   </Assign>
-                  <sap2010:WorkflowViewState.IdRef>Sequence_16</sap2010:WorkflowViewState.IdRef>
                 </Sequence>
               </If.Else>
             </If>
@@ -469,20 +468,20 @@
         </ActivityAction>
       </ui:BrowserScope.Body>
     </ui:BrowserScope>
-    <sads:DebugSymbol.Symbol>dyNFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXEZlZHN0YXQueGFtbGdKA9kDDgIBAUw0TFgCAQJOBVUOAgF8VgXXAxcCAQNTMFNBAgF/UDFQNgIBfVZzVn4CAXpcC9QDFgIBBF49XkQCAQVgDWCGAQIBd2ENZSICAXJmDdMDEgIBBmB8YIMBAgF4Y4sBY7gCAgF2Y8MCY8oCAgF1YVlhbwIBc2YbZjECAQdoEcIDHAIBEMUDEdEDHAIBCWkTwQMeAgERxgMTxgOrAQIBDscDE88DHAIBCm0VtgMgAgEdtwMVuwMmAgEVvAMVwAMlAgESxgOBAcYDqAECAQ/MAz7MA1UCAQ3JAz/JA0sCAQtuF78BIgIBXcABF5ECIgIBSJICF+MCIgIBM+QCF7UDIgIBHrcD1wK3A9wCAgEcuQOoAbkD4wECARu3A4sBtwOQAQIBGrcDUbcDVwIBGbcDYrcDdgIBF7cDzwG3A5MCAgEWvgNXvgNpAgETcEhwWgIBXnMZgQEkAgFwggEZkAEkAgFtkQEZmAEiAgFpmQEZoAEiAgFkoQEZrwEkAgFhsAEZvgEkAgFfwwFIwwFsAgFJxQEZ0wEkAgFb1AEZ4gEkAgFY4wEZ6gEiAgFU6wEZ8gEiAgFP8wEZgQIkAgFMggIZkAIkAgFKlAJIlAJeAgE0lwIZpQIkAgFGpgIZtAIkAgFDtQIZvAIiAgE/vQIZxAIiAgE6xQIZ0wIkAgE31AIZ4gIkAgE15gJI5gJrAgEf6QIZ9wIkAgEx+AIZhgMkAgEuhwMZjgMiAgEqjwMZlgMiAgEllwMZpQMkAgEipgMZtAMkAgEgf6wBf+8BAgFxjgGsAY4B6gECAW+CAVuCAWECAW6WAUSWAVUCAWyTAUWTAUoCAWqeAUSeAbQBAgFnmwFFmwFPAgFlrQGsAa0BuAECAWK8AawBvAGZAwIBYNEBrAHRAZwCAgFc4AGsAeABlwICAVrUAVvUAWECAVnoAUToAVUCAVflAUXlAUoCAVXwAUTwAbMBAgFS7QFF7QFPAgFQ/wGsAf8BuAECAU2OAqwBjgLGAwIBS6MCrAGjApwCAgFHsgKsAbIClwICAUWmAlumAmECAUS6AkS6AlUCAUK3AkW3AkoCAUDCAkTCArMBAgE9vwJFvwJPAgE70QKsAdECuAECATjgAqwB4ALGAwIBNvUCrAH1ApwCAgEyhAOsAYQDlwICATD4Alv4AmECAS+MA0SMA1UCAS2JA0WJA0oCASuUA0SUA7MBAgEokQNFkQNPAgEmowOsAaMDuAECASOyA6wBsgPGAwIBIQ==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dyNFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXEZlZHN0YXQueGFtbGdLA9gDDgIBAU00TVgCAQJPBVYOAgF8VwXWAxcCAQNUMFRBAgF/UTFRNgIBfVdzV34CAXpdC9MDFgIBBF89X0QCAQVhDWGGAQIBd2INZiICAXJnDdIDEgIBBmF8YYMBAgF4ZIsBZKcCAgF2ZLICZLkCAgF1YllibwIBc2cbZzECAQdpEcMDHAIBEMYDEdADHAIBCWoTwgMeAgERxwMTxwOrAQIBDsgDE88DHAIBCm4VtwMgAgEduAMVvAMmAgEVvQMVwQMlAgESxwOBAccDqAECAQ/NAz7NA1UCAQ3KAz/KA0sCAQtvF8ABIgIBXcEBF5ICIgIBSJMCF+QCIgIBM+UCF7YDIgIBHrgD1wK4A9wCAgEcugOoAboD4wECARu4A4sBuAOQAQIBGrgDUbgDVwIBGbgDYrgDdgIBF7gDzwG4A5MCAgEWvwNXvwNpAgETcUhxWgIBXnQZggEkAgFwgwEZkQEkAgFtkgEZmQEiAgFpmgEZoQEiAgFkogEZsAEkAgFhsQEZvwEkAgFfxAFIxAFsAgFJxgEZ1AEkAgFb1QEZ4wEkAgFY5AEZ6wEiAgFU7AEZ8wEiAgFP9AEZggIkAgFMgwIZkQIkAgFKlQJIlQJeAgE0mAIZpgIkAgFGpwIZtQIkAgFDtgIZvQIiAgE/vgIZxQIiAgE6xgIZ1AIkAgE31QIZ4wIkAgE15wJI5wJrAgEf6gIZ+AIkAgEx+QIZhwMkAgEuiAMZjwMiAgEqkAMZlwMiAgElmAMZpgMkAgEipwMZtQMkAgEggAGsAYABhgICAXGPAawBjwGGAgIBb4MBW4MBYQIBbpcBRJcBVQIBbJQBRZQBSgIBap8BRJ8BowECAWecAUWcAU8CAWWuAawBrgG4AQIBYr0BrAG9AYYCAgFg0gGsAdIBiwICAVzhAawB4QGGAgIBWtUBW9UBYQIBWekBROkBVQIBV+YBReYBSgIBVfEBRPEBogECAVLuAUXuAU8CAVCAAqwBgAK4AQIBTY8CrAGPArUDAgFLpAKsAaQCiwICAUezAqwBswKGAgIBRacCW6cCYQIBRLsCRLsCVQIBQrgCRbgCSgIBQMMCRMMCogECAT3AAkXAAk8CATvSAqwB0gK4AQIBOOECrAHhArUDAgE29gKsAfYCiwICATKFA6wBhQOGAgIBMPkCW/kCYQIBL40DRI0DVQIBLYoDRYoDSgIBK5UDRJUDogECASiSA0WSA08CASakA6wBpAO4AQIBI7MDrAGzA7UDAgEh</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="598.4,60" />
-      <sap2010:ViewStateData Id="NavigateTo_1" sap:VirtualizedContainerService.HintSize="561.6,60" />
-      <sap2010:ViewStateData Id="UiElementExists_1" sap:VirtualizedContainerService.HintSize="561.6,107.2" />
-      <sap2010:ViewStateData Id="Click_1" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Click_2" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="314,60" />
-      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="314,60" />
-      <sap2010:ViewStateData Id="Click_3" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Click_4" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="336,868">
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="802.4,60" />
+      <sap2010:ViewStateData Id="NavigateTo_1" sap:VirtualizedContainerService.HintSize="765.6,60" />
+      <sap2010:ViewStateData Id="UiElementExists_1" sap:VirtualizedContainerService.HintSize="765.6,107.2" />
+      <sap2010:ViewStateData Id="Click_1" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Click_2" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="314.4,60" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="314.4,60" />
+      <sap2010:ViewStateData Id="Click_3" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Click_4" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="336.8,873.6">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -490,13 +489,13 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Click_5" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Click_6" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="314,60" />
-      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="314,60" />
-      <sap2010:ViewStateData Id="Click_7" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Click_8" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="336,868">
+      <sap2010:ViewStateData Id="Click_5" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Click_6" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="314.4,60" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="314.4,60" />
+      <sap2010:ViewStateData Id="Click_7" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Click_8" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="336.8,873.6">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -504,13 +503,13 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Click_10" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Click_11" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="314,60" />
-      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="314,60" />
-      <sap2010:ViewStateData Id="Click_12" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Click_13" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Sequence_9" sap:VirtualizedContainerService.HintSize="336,868">
+      <sap2010:ViewStateData Id="Click_10" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Click_11" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="314.4,60" />
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="314.4,60" />
+      <sap2010:ViewStateData Id="Click_12" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Click_13" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Sequence_9" sap:VirtualizedContainerService.HintSize="336.8,873.6">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -518,13 +517,13 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Click_14" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Click_15" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="314,60" />
-      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="314,60" />
-      <sap2010:ViewStateData Id="Click_16" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Click_17" sap:VirtualizedContainerService.HintSize="314,106" />
-      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="336,868">
+      <sap2010:ViewStateData Id="Click_14" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Click_15" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="314.4,60" />
+      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="314.4,60" />
+      <sap2010:ViewStateData Id="Click_16" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Click_17" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="336.8,873.6">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -532,7 +531,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="358,3716">
+      <sap2010:ViewStateData Id="Sequence_12" sap:VirtualizedContainerService.HintSize="359.2,3739.2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -540,9 +539,9 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ExtractData_1" sap:VirtualizedContainerService.HintSize="358,106" />
-      <sap2010:ViewStateData Id="InvokeCode_1" sap:VirtualizedContainerService.HintSize="358,164" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="380,4190">
+      <sap2010:ViewStateData Id="ExtractData_1" sap:VirtualizedContainerService.HintSize="359.2,107.2" />
+      <sap2010:ViewStateData Id="InvokeCode_1" sap:VirtualizedContainerService.HintSize="359.2,164.8" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="381.6,4216">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -550,11 +549,11 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="200,52.8">
+      <sap2010:ViewStateData Id="Sequence_14" sap:VirtualizedContainerService.HintSize="404,4340.8">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -567,29 +566,29 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="561.6,467.2" />
-      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="584,839.2">
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="765.6,4490.4" />
+      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="788,4862.4">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="BrowserScope_1" sap:VirtualizedContainerService.HintSize="598.4,948">
+      <sap2010:ViewStateData Id="BrowserScope_1" sap:VirtualizedContainerService.HintSize="802.4,4971.2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="620.8,1172.8">
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="824.8,5196">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Fedstat_1" sap:VirtualizedContainerService.HintSize="660.8,1252.8">
+      <sap2010:ViewStateData Id="Fedstat_1" sap:VirtualizedContainerService.HintSize="864.8,5276">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>

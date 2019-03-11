@@ -68,33 +68,30 @@
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="StPrerunActivities" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <ui:MessageBox ChosenButton="{x:Null}" Buttons="Ok" Caption="[&quot;Робот-аудитор &quot; + robotName]" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Перед началом работы Робота будут закрыты все файлы Excel и браузер Google Chrome. Пожалуйста, сохраните все изменения и затем нажмите на OK&quot;]" TopMost="True" />
-    <TryCatch DisplayName="Try Catch">
+    <TryCatch DisplayName="Try Catch" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Try>
-        <Sequence DisplayName="Убиваем процессы бразуера и Excel">
+        <Sequence DisplayName="Убиваем процессы бразуера и Excel" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <ui:KillProcess ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process" sap2010:WorkflowViewState.IdRef="KillProcess_1" ProcessName="EXCEL" />
-          <ui:KillProcess ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process" sap2010:WorkflowViewState.IdRef="KillProcess_2" ProcessName="chrome" />
-          <sap2010:WorkflowViewState.IdRef>Sequence_2</sap2010:WorkflowViewState.IdRef>
+          <ui:KillProcess ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process" sap2010:WorkflowViewState.IdRef="KillProcess_2" ProcessName="iexplore" />
         </Sequence>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception">
+        <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
           <ActivityAction x:TypeArguments="s:Exception">
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
           </ActivityAction>
-          <sap2010:WorkflowViewState.IdRef>Catch`1_1</sap2010:WorkflowViewState.IdRef>
         </Catch>
       </TryCatch.Catches>
-      <sap2010:WorkflowViewState.IdRef>TryCatch_1</sap2010:WorkflowViewState.IdRef>
     </TryCatch>
     <ui:MessageBox ChosenButton="{x:Null}" Buttons="Ok" Caption="[&quot;Робот-аудитор &quot; + robotName]" DisplayName="Message Box" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;Выберите исходный файл конфигурации&quot;]" TopMost="True" />
     <ui:SelectFile DisplayName="Select File" Filter="All files (*.*)|*.*" sap2010:WorkflowViewState.IdRef="SelectFile_1" SelectedFile="[configFilePath]" />
-    <sads:DebugSymbol.Symbol>dy5FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0UHJlcnVuQWN0aXZpdGllcy54YW1sD0UDXg4CAQFGBUboAgIBD0cFWhACAQlbBVv/AQIBBVwFXJwBAgECRkFGawIBEUa6AUbWAgIBEEkJTRQCAQpbQVtrAgEHW7oBW+0BAgEGXIcBXJkBAgEDSgtKqgECAQ1LC0urAQIBC0qgAUqnAQIBDkugAUuoAQIBDA==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dy5FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0UHJlcnVuQWN0aXZpdGllcy54YW1sD0UDWw4CAQFGBUboAgIBD0cFVxACAQlYBVj/AQIBBVkFWZwBAgECRkFGawIBEUa6AUbWAgIBEEkJTBQCAQpYQVhrAgEHWLoBWO0BAgEGWYcBWZkBAgEDSgtKqgECAQ1LC0utAQIBC0qgAUqnAQIBDkugAUuqAQIBDA==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="MessageBox_1" sap:VirtualizedContainerService.HintSize="414.4,60" />
+      <sap2010:ViewStateData Id="MessageBox_1" sap:VirtualizedContainerService.HintSize="417.6,60" />
       <sap2010:ViewStateData Id="KillProcess_1" sap:VirtualizedContainerService.HintSize="200,22.4" />
       <sap2010:ViewStateData Id="KillProcess_2" sap:VirtualizedContainerService.HintSize="200,22.4" />
       <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="222.4,209.6">
@@ -104,25 +101,25 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Catch`1_1" sap:VirtualizedContainerService.HintSize="400,105.6">
+      <sap2010:ViewStateData Id="Catch`1_1" sap:VirtualizedContainerService.HintSize="403.2,22.4">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
             <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="414.4,270.4" />
-      <sap2010:ViewStateData Id="MessageBox_2" sap:VirtualizedContainerService.HintSize="414.4,60" />
-      <sap2010:ViewStateData Id="SelectFile_1" sap:VirtualizedContainerService.HintSize="414.4,22.4" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="436.8,657.6">
+      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="417.6,440.8" />
+      <sap2010:ViewStateData Id="MessageBox_2" sap:VirtualizedContainerService.HintSize="417.6,60" />
+      <sap2010:ViewStateData Id="SelectFile_1" sap:VirtualizedContainerService.HintSize="417.6,22.4" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="440,828">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="StPrerunActivities_1" sap:VirtualizedContainerService.HintSize="476.8,737.6" />
+      <sap2010:ViewStateData Id="StPrerunActivities_1" sap:VirtualizedContainerService.HintSize="480,908" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

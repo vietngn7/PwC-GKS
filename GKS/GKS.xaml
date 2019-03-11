@@ -118,7 +118,7 @@
             <ui:NavigateTo Browser="{x:Null}" DisplayName="Navigate To" sap2010:WorkflowViewState.IdRef="NavigateTo_1" Url="[url]" />
             <ui:UiElementExists DisplayName="Element Exists 'DIV'" Exists="[pageLoadedProperly]" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
               <ui:UiElementExists.Target>
-                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="6b6e26c7f741af61656315064cea4ee8" Selector="&lt;webctrl aaname='Выберите ' idx='1' tag='SPAN' /&gt;" TimeoutMS="3000" WaitForReady="INTERACTIVE" />
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="d592bc65a159aa081a942b960f6a80e1" Selector="&lt;html omit:title='Средние цены производителей промышленных товаров с 2017 г., рубл*' /&gt;&lt;webctrl href='http://www.gks.ru/db/Banner_new.jpg' tag='IMG' /&gt;" TimeoutMS="3000" WaitForReady="INTERACTIVE" />
               </ui:UiElementExists.Target>
             </ui:UiElementExists>
             <If Condition="[pageLoadedProperly]" sap2010:WorkflowViewState.IdRef="If_5">
@@ -204,7 +204,7 @@
                                   </Assign.Value>
                                 </Assign>
                               </Switch>
-                              <ui:InjectJsScript ScriptOutput="{x:Null}" ContinueOnError="True" DisplayName="Inject Js Script" sap2010:WorkflowViewState.IdRef="InjectJsScript_3" InputParameter="[param + &quot;|&quot;+ row(currentIndex + 2).ToString]" ScriptCode="function(e, s) {&#xA;   var params = s.split('|');&#xA;   document.getElementsByName(params[0])[0].value =params[1];&#xA;}">
+                              <ui:InjectJsScript ScriptOutput="{x:Null}" DisplayName="Inject Js Script" sap2010:WorkflowViewState.IdRef="InjectJsScript_3" InputParameter="[param + &quot;|&quot;+ row(currentIndex + 2).ToString]" ScriptCode="function(e, s) {&#xD;&#xA;   var params = s.split('|');&#xD;&#xA;   var selector = document.getElementsByName(params[0])[0];&#xD;&#xA;   var options = selector.options;&#xD;&#xA;   for (var i = 0; i &lt; options.length; ++i) {&#xD;&#xA;        if (options[i].value == params[1]) {&#xD;&#xA;            selector.selectedIndex = i;&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;}">
                                 <ui:InjectJsScript.Target>
                                   <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" WaitForReady="COMPLETE" />
                                 </ui:InjectJsScript.Target>
@@ -234,7 +234,7 @@
                         </ui:CursorPosition>
                       </ui:Click.CursorPosition>
                       <ui:Click.Target>
-                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="38c16e26eb9970be77b2a79c29a6f46c" Selector="&lt;webctrl name='god_chk' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="9d2095c46b141c7d750b370f1acdbbd8" Selector="&lt;html omit:title='Средние цены производителей промышленных товаров с 2017 г., рубл*' /&gt;&lt;webctrl name='god_chk' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
                       </ui:Click.Target>
                     </ui:Click>
                     <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'INPUT  Manual'" sap2010:WorkflowViewState.IdRef="Click_12" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
@@ -249,7 +249,7 @@
                         </ui:CursorPosition>
                       </ui:Click.CursorPosition>
                       <ui:Click.Target>
-                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="cb3f213286db9724e4f3dcc2e348b154" Selector="&lt;webctrl id='Manual' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="e0dab71a01698264e37e2c8f5a587ac9" Selector="&lt;html omit:title='Средние цены производителей промышленных товаров с 2017 г., рубл*' /&gt;&lt;webctrl aaname=' Ручное макетирование' tag='SPAN' /&gt;" WaitForReady="COMPLETE" />
                       </ui:Click.Target>
                     </ui:Click>
                     <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'INPUT  Manual'" sap2010:WorkflowViewState.IdRef="Click_13" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
@@ -264,7 +264,7 @@
                         </ui:CursorPosition>
                       </ui:Click.CursorPosition>
                       <ui:Click.Target>
-                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="09574580579fbec444ffd3b8aaaa4c9b" Selector="&lt;webctrl name='_period' tableCol='3' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="09574580579fbec444ffd3b8aaaa4c9b" Selector="&lt;html omit:title='Средние цены производителей промышленных товаров с 2017 г., рубл*' /&gt;&lt;webctrl name='_period' tableCol='3' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
                       </ui:Click.Target>
                     </ui:Click>
                     <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'INPUT  Manual'" sap2010:WorkflowViewState.IdRef="Click_14" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
@@ -279,7 +279,7 @@
                         </ui:CursorPosition>
                       </ui:Click.CursorPosition>
                       <ui:Click.Target>
-                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="adc7d0970c1301360f56721d10c296eb" Selector="&lt;webctrl name='_okei' tableCol='4' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="b4b1ee49291831d2976720c301f0c283" Selector="&lt;html omit:title='Средние цены на приобретенные организациями отдельные виды товар*' /&gt;&lt;webctrl name='_okei' tableCol='4' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
                       </ui:Click.Target>
                     </ui:Click>
                     <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="3.4. Click &quot;Show Results&quot;" sap2010:WorkflowViewState.IdRef="Click_15" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="True">
@@ -294,12 +294,12 @@
                         </ui:CursorPosition>
                       </ui:Click.CursorPosition>
                       <ui:Click.Target>
-                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="a320913775a015ca47d35044f82f8c62" Selector="&lt;webctrl name='STbl' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="a320913775a015ca47d35044f82f8c62" Selector="&lt;html omit:title='Средние цены производителей промышленных товаров с 2017 г., рубл*' /&gt;&lt;webctrl name='STbl' tag='INPUT' /&gt;" WaitForReady="COMPLETE" />
                       </ui:Click.Target>
                     </ui:Click>
                   </Sequence>
                   <Sequence DisplayName="Data Scraping" sap2010:WorkflowViewState.IdRef="Sequence_20">
-                    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser '          Page'" sap2010:WorkflowViewState.IdRef="BrowserScope_3" InformativeScreenshot="57e1cce371f2b1e8276104de80d97eeb" Selector="&lt;html app='chrome.exe' htmlwindowname='newWindow' title='Результат запроса' /&gt;">
+                    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="IE" DisplayName="Attach Browser '          Page'" sap2010:WorkflowViewState.IdRef="BrowserScope_3" InformativeScreenshot="57e1cce371f2b1e8276104de80d97eeb" Selector="&lt;html omit:htmlwindowname='newWindow' title='Результат запроса' /&gt;">
                       <ui:BrowserScope.Body>
                         <ActivityAction x:TypeArguments="x:Object">
                           <ActivityAction.Argument>
@@ -348,7 +348,7 @@
         </ActivityAction>
       </ui:BrowserScope.Body>
     </ui:BrowserScope>
-    <sads:DebugSymbol.Symbol>dx9FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXEdLUy54YW1sXksD4AIOAgEBTzVPPAIBAlEFWA4CAXRZBW4KAgFobwXeAhcCAQNWMFZBAgF3UzFTNgIBdVkTWUsCAWlbCWISAgFwZQlsEgIBbG9zb34CAWZ1C9sCFgIBBGAzYDQCAXNdNF08AgFxajNqNAIBb2c0ZzwCAW12DXaGAQIBY3cNeyICAV58DdoCEgIBBXZ8doMBAgFkeYsBecQBAgFiec8BedUBAgFhd0t3YQIBX3wbfDECAQZ+EcsCHAIBD84CEdgCHAIBCIIBE6wCHgIBHq0CE8oCHgIBEM8CE88CqwECAQ3QAhPXAhwCAQmIARWPAR4CAVqQARXgAR0CASnhARXvASACASfwARX+ASACASX/ARWNAiACASOOAhWcAiACASGdAhWrAiACAR+uAhXJAicCARHPAoEBzwKoAQIBDtUCPtUCVQIBDNICP9ICSwIBCo0BP40BQAIBXYoBQIoBTgIBW5EBF98BIgIBLJABdpABjQECASrtAagB7QHWAQIBKPwBqAH8AdMBAgEmiwKoAYsC4wECASSaAqgBmgLhAQIBIqkCqAGpAtMBAgEgrgKwAq4ChgMCAR20AhvGAiYCARKSARnWAR4CATLXARneASICAS21Ah25Ai4CARW6Ah3EAi0CARTFAh3FAoQBAgETkgEnkgFAAgEzlAEd1AEoAgE23AFD3AFVAgEw2QFE2QFSAgEutQK4A7UCvQMCARy3ArABtwKUAgIBG7UCkwG1ApgBAgEatQJZtQJfAgEZtQJqtQJ+AgEXtQLXAbUC9AICARaVAR/OASgCATvPAR/TATMCATeVAasClQG7AgIBPJYBIZ0BKgIBVp4BIaUBKgIBUqYBIa0BKgIBTq4BIbUBKgIBSrYBIb0BKgIBRr4BIcUBKgIBQsYBIc0BKgIBPs8BWs8BYAIBOs8BhwLPAYMDAgE5zwHCAc8B+wECATibAUybAVECAVmYAU2YAVQCAVejAUyjAVECAVWgAU2gAVQCAVOrAUyrAVACAVGoAU2oAVQCAU+zAUyzAVUCAU2wAU2wAVQCAUu7AUy7AU8CAUm4AU24AVQCAUfDAUzDAVICAUXAAU3AAVQCAUPLAUzLAVICAUHIAU3IAVQCAT8=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dx9FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXEdLUy54YW1sXUsD4AIOAgEBTzVPPAIBAlEFWA4CAXNZBW4KAgFnbwXeAhcCAQNWMFZBAgF2UzFTNgIBdFkTWUsCAWhbCWISAgFvZQlsEgIBa29zb34CAWV1C9sCFgIBBGAzYDQCAXJdNF08AgFwajNqNAIBbmc0ZzwCAWx2DXaGAQIBYncNeyICAV18DdoCEgIBBXZ8doMBAgFjeYsBebACAgFhebsCecECAgFgd0t3YQIBXnwbfDECAQZ+EcsCHAIBD84CEdgCHAIBCIIBE6wCHgIBHq0CE8oCHgIBEM8CE88CqwECAQ3QAhPXAhwCAQmIARWPAR4CAVmQARXgAR0CASnhARXvASACASfwARX+ASACASX/ARWNAiACASOOAhWcAiACASGdAhWrAiACAR+uAhXJAicCARHPAoEBzwKoAQIBDtUCPtUCVQIBDNICP9ICSwIBCo0BP40BQAIBXIoBQIoBTgIBWpEBF98BIgIBLJABdpABjQECASrtAagB7QGzAgIBKPwBqAH8AcICAgEmiwKoAYsCwAICASSaAqgBmgK+AgIBIqkCqAGpArACAgEgrgKsAq4C9gICAR20AhvGAiYCARKSARnWAR4CATLXARneASICAS21Ah25Ai4CARW6Ah3EAi0CARTFAh3FAoQBAgETkgEnkgFAAgEzlAEd1AEoAgE23AFD3AFVAgEw2QFE2QFSAgEutQK4A7UCvQMCARy3ArABtwKUAgIBG7UCkwG1ApgBAgEatQJZtQJfAgEZtQJqtQJ+AgEXtQLXAbUC9AICARaVAR/OASgCATrPAR/TATMCATeVAasClQG7AgIBO5YBIZ0BKgIBVZ4BIaUBKgIBUaYBIa0BKgIBTa4BIbUBKgIBSbYBIb0BKgIBRb4BIcUBKgIBQcYBIc0BKgIBPc8B8AHPAeAEAgE5zwGrAc8B5AECATibAUybAVECAViYAU2YAVQCAVajAUyjAVECAVSgAU2gAVQCAVKrAUyrAVACAVCoAU2oAVQCAU6zAUyzAVUCAUywAU2wAVQCAUq7AUy7AU8CAUi4AU24AVQCAUbDAUzDAVICAUTAAU3AAVQCAULLAUzLAVICAUDIAU3IAVQCAT4=</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -373,7 +373,7 @@
       <sap2010:ViewStateData Id="Assign_28" sap:VirtualizedContainerService.HintSize="243.2,60" />
       <sap2010:ViewStateData Id="Assign_29" sap:VirtualizedContainerService.HintSize="243.2,60" />
       <sap2010:ViewStateData Id="Assign_30" sap:VirtualizedContainerService.HintSize="243.2,60" />
-      <sap2010:ViewStateData Id="Switch`1_3" sap:VirtualizedContainerService.HintSize="477.6,491.2">
+      <sap2010:ViewStateData Id="Switch`1_3" sap:VirtualizedContainerService.HintSize="477.6,1252.8">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
@@ -383,7 +383,7 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="InjectJsScript_3" sap:VirtualizedContainerService.HintSize="477.6,96.8" />
-      <sap2010:ViewStateData Id="Sequence_16" sap:VirtualizedContainerService.HintSize="500,752.8">
+      <sap2010:ViewStateData Id="Sequence_16" sap:VirtualizedContainerService.HintSize="500,1514.4">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -391,7 +391,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="624.8,902.4">
+      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="624.8,1664">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -400,7 +400,7 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Assign_31" sap:VirtualizedContainerService.HintSize="624.8,60" />
-      <sap2010:ViewStateData Id="Sequence_17" sap:VirtualizedContainerService.HintSize="647.2,1127.2">
+      <sap2010:ViewStateData Id="Sequence_17" sap:VirtualizedContainerService.HintSize="647.2,1888.8">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -408,7 +408,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="While_3" sap:VirtualizedContainerService.HintSize="672.8,1286.4">
+      <sap2010:ViewStateData Id="While_3" sap:VirtualizedContainerService.HintSize="672.8,2048">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -456,7 +456,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_18" sap:VirtualizedContainerService.HintSize="695.2,2247.2">
+      <sap2010:ViewStateData Id="Sequence_18" sap:VirtualizedContainerService.HintSize="695.2,3008.8">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -491,7 +491,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_21" sap:VirtualizedContainerService.HintSize="717.6,3386.4">
+      <sap2010:ViewStateData Id="Sequence_21" sap:VirtualizedContainerService.HintSize="717.6,4148">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -508,16 +508,16 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="1079.2,3536" />
-      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="1101.6,3908">
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="1079.2,4297.6" />
+      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="1101.6,4669.6">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="BrowserScope_2" sap:VirtualizedContainerService.HintSize="1116,4055.2" />
-      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="1138.4,4909.6">
+      <sap2010:ViewStateData Id="BrowserScope_2" sap:VirtualizedContainerService.HintSize="1116,4816.8" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="1138.4,5671.2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -525,7 +525,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="GKS_059_1" sap:VirtualizedContainerService.HintSize="1178.4,4989.6">
+      <sap2010:ViewStateData Id="GKS_059_1" sap:VirtualizedContainerService.HintSize="1178.4,5751.2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
