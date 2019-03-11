@@ -156,12 +156,20 @@
             </TryCatch>
             <Assign>
               <Assign.To>
+                <OutArgument x:TypeArguments="x:Int32">[searchIndex]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Int32">[searchIndex+1]</InArgument>
+              </Assign.Value>
+              <sap2010:WorkflowViewState.IdRef>Assign_17</sap2010:WorkflowViewState.IdRef>
+            </Assign>
+            <Assign sap2010:WorkflowViewState.IdRef="Assign_15">
+              <Assign.To>
                 <OutArgument x:TypeArguments="x:Double">[roundedExtractedDataValue]</OutArgument>
               </Assign.To>
               <Assign.Value>
                 <InArgument x:TypeArguments="x:Double">[Math.Round(CDbl(ExtractDataTable.Rows(searchIndex)(0).ToString().Replace(",", ".").Replace(" ", "")), 2)]</InArgument>
               </Assign.Value>
-              <sap2010:WorkflowViewState.IdRef>Assign_15</sap2010:WorkflowViewState.IdRef>
             </Assign>
             <If Condition="[True.Equals(isOriginalTableValueCorrect) and roundedOriginalDataValue.Equals(roundedExtractedDataValue)]" sap2010:WorkflowViewState.IdRef="If_3">
               <If.Then>
@@ -274,7 +282,7 @@
         </Sequence>
       </If.Else>
     </If>
-    <sads:DebugSymbol.Symbol>dyhFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0VXBkYXRlRGF0YS54YW1sSE0DlgIOAgEBTgWUAgoCAQJOE05ZAgEDUAlaFAIBWl0JkgIUAgEEUQtRrwECAWBSC1kUAgFbYgtpFAIBVWoLbyMCAU9wC8IBFgIBKcMBC8oBFAIBJMsBC5ECEwIBBVF5UawBAgFhVzZXbAIBXlQ3VEMCAVxnNWdBAgFYZDZkPQIBVmxJbFoCAVNtRm1TAgFRasIBatgBAgFQdg2cARgCAUGdAQ2lARYCAT2mAQ3BARICASrIATXIAUYCASfFATbFAUMCASXMAQ2QAhgCAQfLAUbLAXYCAQZ4EYkBHAIBRpEBFZgBHgIBQqIBOKIBogECAUCfATmfAVQCAT6mARumAYYBAgErqAERsgEcAgE2tQERvwEcAgEv0QEP9wEaAgEW+AEP/wEYAgESgAIPhwIYAgENiAIPjwIYAgEIeROAARwCAUuBAROIARwCAUeWAUGWAUYCAUWTAUKTAV8CAUOpAROpAaMBAgE7qgETsQEcAgE3tgETtgGnAQIBNLcBE74BHAIBMNMBE+QBHgIBG+wBF/MBIAIBF/0BOv0BVQIBFPoBO/oBawIBE4UCOYUCRAIBEIICOoICQQIBDo0COY0CSgIBC4oCOooCRwIBCX4+fp0BAgFOez97WQIBTIYBP4YBQwIBSoMBQIMBXQIBSKkBgAGpAaABAgE8rwE+rwFNAgE6rAE/rAFLAgE4tgGBAbYBpAECATW8AT68AVACATO5AT+5AUsCATHUARXbAR4CASDcARXjAR4CARzxAUPxAUgCARruAUTuAWECARjZAUDZAaoBAgEj1gFB1gFcAgEh4QFB4QFFAgEf3gFC3gFfAgEd</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dyhFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0VXBkYXRlRGF0YS54YW1sS00DngIOAgEBTgWcAgoCAQJOE05ZAgEDUAlaFAIBX10JmgIUAgEEUQtRrwECAWVSC1kUAgFgYgtpFAIBWmoLbyMCAVRwC8oBFgIBKcsBC9IBFAIBJNMBC5kCEwIBBVF5UawBAgFmVzZXbAIBY1Q3VEMCAWFnNWdBAgFdZDZkPQIBW2xJbFoCAVhtRm1TAgFWasIBatgBAgFVdg2cARgCAUadAQ2lARYCAUGmAQ2tARYCAT2uAQ3JARICASrQATXQAUYCASfNATbNAUMCASXUAQ2YAhgCAQfTAUbTAXYCAQZ4EYkBHAIBS5EBFZgBHgIBR6IBN6IBRgIBRJ8BOJ8BRQIBQqsBOKsBogECAUCoATmoAVQCAT6uARuuAYYBAgErsAERugEcAgE2vQERxwEcAgEv2QEP/wEaAgEWgAIPhwIYAgESiAIPjwIYAgENkAIPlwIYAgEIeROAARwCAVCBAROIARwCAUyWAUGWAUYCAUqTAUKTAV8CAUixAROxAaMBAgE7sgETuQEcAgE3vgETvgGnAQIBNL8BE8YBHAIBMNsBE+wBHgIBG/QBF/sBIAIBF4UCOoUCVQIBFIICO4ICawIBE40COY0CRAIBEIoCOooCQQIBDpUCOZUCSgIBC5ICOpICRwIBCX4+fp0BAgFTez97WQIBUYYBP4YBQwIBT4MBQIMBXQIBTbEBgAGxAaABAgE8twE+twFNAgE6tAE/tAFLAgE4vgGBAb4BpAECATXEAT7EAVACATPBAT/BAUsCATHcARXjAR4CASDkARXrAR4CARz5AUP5AUgCARr2AUT2AWECARjhAUDhAaoBAgEj3gFB3gFcAgEh6QFB6QFFAgEf5gFC5gFfAgEd</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -308,6 +316,7 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="TryCatch_2" sap:VirtualizedContainerService.HintSize="698.4,516" />
+      <sap2010:ViewStateData Id="Assign_17" sap:VirtualizedContainerService.HintSize="698.4,60" />
       <sap2010:ViewStateData Id="Assign_15" sap:VirtualizedContainerService.HintSize="698.4,60" />
       <sap2010:ViewStateData Id="LogMessage_4" sap:VirtualizedContainerService.HintSize="314.4,92.8" />
       <sap2010:ViewStateData Id="Assign_13" sap:VirtualizedContainerService.HintSize="314.4,60" />
@@ -328,7 +337,7 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="698.4,467.2" />
-      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="720.8,1248">
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="720.8,1348">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -373,15 +382,15 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="While_1" sap:VirtualizedContainerService.HintSize="720.8,1100" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="743.2,2840.8">
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="743.2,2940.8">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="1104.8,2990.4" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="1127.2,3143.2">
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="1104.8,3090.4" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="1127.2,3243.2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -389,7 +398,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="StWtiteData_1" sap:VirtualizedContainerService.HintSize="1167.2,3223.2" />
+      <sap2010:ViewStateData Id="StWtiteData_1" sap:VirtualizedContainerService.HintSize="1167.2,3323.2" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

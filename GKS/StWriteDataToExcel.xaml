@@ -143,7 +143,7 @@
                       </Assign.Value>
                     </Assign>
                     <ui:ExcelWriteCell Cell="[statusCell]" DisplayName="Write Cell" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_1" SheetName="[sheetName]" Text="[status.ToString]" />
-                    <If Condition="[status is &quot;Сверка пройдена&quot;]" sap2010:WorkflowViewState.IdRef="If_1">
+                    <If Condition="[String.Compare(status.ToString, &quot;Сверка пройдена&quot;) = 0]" sap2010:WorkflowViewState.IdRef="If_1">
                       <If.Then>
                         <ui:ExcelSetRangeColor Color="[System.Drawing.Color.Green]" DisplayName="Set Range Green Color" sap2010:WorkflowViewState.IdRef="ExcelSetRangeColor_1" Range="[statusCell]" SheetName="[sheetName]" />
                       </If.Then>
@@ -167,7 +167,7 @@
         </ActivityAction>
       </ui:ExcelApplicationScope.Body>
     </ui:ExcelApplicationScope>
-    <sads:DebugSymbol.Symbol>dy5FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0V3JpdGVEYXRhVG9FeGNlbC54YW1sNwFoAXsBAkwDqwEOAgEBUQVYDgIBTFkFWasBAgFHWgVhDgIBQ2IFaQ4CAT9qBakBIAIBAlYwVkoCAU9TMVM3AgFNWTlZQQIBSlmdAVmoAQIBSF8wX0sCAUZcMVw3AgFEZzBnaQIBQmQxZDcCAUBqtgFqvgECAT1wC6YBFgIBA3QNdNEBAgE2dQ11ygECATF2DXaeAQIBLHcNfhYCASh/DaUBGgIBBHTGAXTOAQIBO3Q+dFICATl0qwF0uAECATd1rAF1rwECATV1nwF1ogECATR1ugF1xwECATJ2JXYpAgEwdpMBdpsBAgEvdoABdo0BAgEtfDd8OAIBK3k4eUgCASl/mAF/pgECASaFAROiAR4CAQWJARWQAR4CASGRARWRAbsBAgEakgEVmQEaAgELmgEVoQEeAgEGjgFAjgFdAgEkiwFBiwFNAgEikQEtkQE7AgEfkQGlAZEBuAECAR2RAZIBkQGfAQIBG5IBI5IBTAIBDJQBGZQB3wECARSXARmXAdsBAgEOnwE/nwFTAgEJnAFAnAFQAgEHlAE2lAFUAgEZlAG2AZQBxAECAReUAc8BlAHcAQIBFZcBNpcBUgIBE5cBsgGXAcABAgERlwHLAZcB2AECAQ8=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dy5FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0V3JpdGVEYXRhVG9FeGNlbC54YW1sNwFoAXsBAkwDqwEOAgEBUQVYDgIBTFkFWasBAgFHWgVhDgIBQ2IFaQ4CAT9qBakBIAIBAlYwVkoCAU9TMVM3AgFNWTlZQQIBSlmdAVmoAQIBSF8wX0sCAUZcMVw3AgFEZzBnaQIBQmQxZDcCAUBqtgFqvgECAT1wC6YBFgIBA3QNdNEBAgE2dQ11ygECATF2DXaeAQIBLHcNfhYCASh/DaUBGgIBBHTGAXTOAQIBO3Q+dFICATl0qwF0uAECATd1rAF1rwECATV1nwF1ogECATR1ugF1xwECATJ2JXYpAgEwdpMBdpsBAgEvdoABdo0BAgEtfDd8OAIBK3k4eUgCASl/mAF/pgECASaFAROiAR4CAQWJARWQAR4CASGRARWRAbsBAgEakgEVmQEaAgELmgEVoQEeAgEGjgFAjgFdAgEkiwFBiwFNAgEikQEtkQE7AgEfkQGlAZEBuAECAR2RAZIBkQGfAQIBG5IBI5IBZwIBDJQBGZQB3wECARSXARmXAdsBAgEOnwE/nwFTAgEJnAFAnAFQAgEHlAE2lAFUAgEZlAG2AZQBxAECAReUAc8BlAHcAQIBFZcBNpcBUgIBE5cBsgGXAcABAgERlwHLAZcB2AECAQ8=</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
