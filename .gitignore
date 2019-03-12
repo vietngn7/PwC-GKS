@@ -1,6 +1,8 @@
 *.xlsx
 *.xls
+*.xlsm
 
+!GKS.xlsm
 !GKS.xlsx
 
 GKS/.local/*
