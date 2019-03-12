@@ -69,7 +69,6 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Fedstat" sap2010:WorkflowViewState.IdRef="Sequence_3">
@@ -442,7 +441,7 @@
                         <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="5647151ee173ea27b3005e6da9658fbc" Selector="&lt;webctrl parentid='mCSB_6_container' tag='TABLE' /&gt;" WaitForReady="COMPLETE" />
                       </ui:ExtractData.Target>
                     </ui:ExtractData>
-                    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim flippedDt As New DataTable&#xA;Dim dt As New DataTable&#xA;dt=inputDt&#xA;&#xA;flippedDt.Columns.AddRange(&#xA; dt.Select.Select(&#xA; Function(dr) New DataColumn(&quot;col&quot; &amp; dt.Rows.IndexOf(dr), GetType(Object))).ToArray)&#xA;&#xA;For Each dc As DataColumn In dt.Columns&#xA; flippedDt.Rows.Add(dt.Select.Select(Function(dr) dr(dc).ToString).ToArray)&#xA; Next&#xA;&#xA;inputDt=flippedDt" DisplayName="Invoke Code" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+                    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim flippedDt As New DataTable&#xD;&#xA;Dim dt As New DataTable&#xD;&#xA;dt=inputDt&#xD;&#xA;&#xD;&#xA;flippedDt.Columns.AddRange(&#xD;&#xA; dt.Select.Select(&#xD;&#xA; Function(dr) New DataColumn(&quot;col&quot; &amp; dt.Rows.IndexOf(dr), GetType(Object))).ToArray)&#xD;&#xA;&#xD;&#xA;For Each dc As DataColumn In dt.Columns&#xD;&#xA; flippedDt.Rows.Add(dt.Select.Select(Function(dr) dr(dc).ToString).ToArray)&#xD;&#xA; Next&#xD;&#xA;&#xD;&#xA;inputDt=flippedDt&#xD;&#xA;inputDt.Rows.InsertAt(inputDt.NewRow(), 0)" DisplayName="Invoke Code" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
                       <ui:InvokeCode.Arguments>
                         <InOutArgument x:TypeArguments="sd:DataTable" x:Key="inputDt">[ExtractDataTable]</InOutArgument>
                       </ui:InvokeCode.Arguments>
@@ -468,7 +467,7 @@
         </ActivityAction>
       </ui:BrowserScope.Body>
     </ui:BrowserScope>
-    <sads:DebugSymbol.Symbol>dyNFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXEZlZHN0YXQueGFtbGdLA9gDDgIBAU00TVgCAQJPBVYOAgF8VwXWAxcCAQNUMFRBAgF/UTFRNgIBfVdzV34CAXpdC9MDFgIBBF89X0QCAQVhDWGGAQIBd2INZiICAXJnDdIDEgIBBmF8YYMBAgF4ZIsBZKcCAgF2ZLICZLkCAgF1YllibwIBc2cbZzECAQdpEcMDHAIBEMYDEdADHAIBCWoTwgMeAgERxwMTxwOrAQIBDsgDE88DHAIBCm4VtwMgAgEduAMVvAMmAgEVvQMVwQMlAgESxwOBAccDqAECAQ/NAz7NA1UCAQ3KAz/KA0sCAQtvF8ABIgIBXcEBF5ICIgIBSJMCF+QCIgIBM+UCF7YDIgIBHrgD1wK4A9wCAgEcugOoAboD4wECARu4A4sBuAOQAQIBGrgDUbgDVwIBGbgDYrgDdgIBF7gDzwG4A5MCAgEWvwNXvwNpAgETcUhxWgIBXnQZggEkAgFwgwEZkQEkAgFtkgEZmQEiAgFpmgEZoQEiAgFkogEZsAEkAgFhsQEZvwEkAgFfxAFIxAFsAgFJxgEZ1AEkAgFb1QEZ4wEkAgFY5AEZ6wEiAgFU7AEZ8wEiAgFP9AEZggIkAgFMgwIZkQIkAgFKlQJIlQJeAgE0mAIZpgIkAgFGpwIZtQIkAgFDtgIZvQIiAgE/vgIZxQIiAgE6xgIZ1AIkAgE31QIZ4wIkAgE15wJI5wJrAgEf6gIZ+AIkAgEx+QIZhwMkAgEuiAMZjwMiAgEqkAMZlwMiAgElmAMZpgMkAgEipwMZtQMkAgEggAGsAYABhgICAXGPAawBjwGGAgIBb4MBW4MBYQIBbpcBRJcBVQIBbJQBRZQBSgIBap8BRJ8BowECAWecAUWcAU8CAWWuAawBrgG4AQIBYr0BrAG9AYYCAgFg0gGsAdIBiwICAVzhAawB4QGGAgIBWtUBW9UBYQIBWekBROkBVQIBV+YBReYBSgIBVfEBRPEBogECAVLuAUXuAU8CAVCAAqwBgAK4AQIBTY8CrAGPArUDAgFLpAKsAaQCiwICAUezAqwBswKGAgIBRacCW6cCYQIBRLsCRLsCVQIBQrgCRbgCSgIBQMMCRMMCogECAT3AAkXAAk8CATvSAqwB0gK4AQIBOOECrAHhArUDAgE29gKsAfYCiwICATKFA6wBhQOGAgIBMPkCW/kCYQIBL40DRI0DVQIBLYoDRYoDSgIBK5UDRJUDogECASiSA0WSA08CASakA6wBpAO4AQIBI7MDrAGzA7UDAgEh</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dyNFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXEZlZHN0YXQueGFtbGdKA9cDDgIBAUw0TFgCAQJOBVUOAgF8VgXVAxcCAQNTMFNBAgF/UDFQNgIBfVZzVn4CAXpcC9IDFgIBBF49XkQCAQVgDWCGAQIBd2ENZSICAXJmDdEDEgIBBmB8YIMBAgF4Y4sBY6cCAgF2Y7ICY7kCAgF1YVlhbwIBc2YbZjECAQdoEcIDHAIBEMUDEc8DHAIBCWkTwQMeAgERxgMTxgOrAQIBDscDE84DHAIBCm0VtgMgAgEdtwMVuwMmAgEVvAMVwAMlAgESxgOBAcYDqAECAQ/MAz7MA1UCAQ3JAz/JA0sCAQtuF78BIgIBXcABF5ECIgIBSJICF+MCIgIBM+QCF7UDIgIBHrcD1wK3A9wCAgEcuQOoAbkD4wECARu3A4sBtwOQAQIBGrcDUbcDVwIBGbcDYrcDdgIBF7cDzwG3A5MCAgEWvgNXvgNpAgETcEhwWgIBXnMZgQEkAgFwggEZkAEkAgFtkQEZmAEiAgFpmQEZoAEiAgFkoQEZrwEkAgFhsAEZvgEkAgFfwwFIwwFsAgFJxQEZ0wEkAgFb1AEZ4gEkAgFY4wEZ6gEiAgFU6wEZ8gEiAgFP8wEZgQIkAgFMggIZkAIkAgFKlAJIlAJeAgE0lwIZpQIkAgFGpgIZtAIkAgFDtQIZvAIiAgE/vQIZxAIiAgE6xQIZ0wIkAgE31AIZ4gIkAgE15gJI5gJrAgEf6QIZ9wIkAgEx+AIZhgMkAgEuhwMZjgMiAgEqjwMZlgMiAgEllwMZpQMkAgEipgMZtAMkAgEgf6wBf4YCAgFxjgGsAY4BhgICAW+CAVuCAWECAW6WAUSWAVUCAWyTAUWTAUoCAWqeAUSeAaMBAgFnmwFFmwFPAgFlrQGsAa0BuAECAWK8AawBvAGGAgIBYNEBrAHRAYsCAgFc4AGsAeABhgICAVrUAVvUAWECAVnoAUToAVUCAVflAUXlAUoCAVXwAUTwAaIBAgFS7QFF7QFPAgFQ/wGsAf8BuAECAU2OAqwBjgK1AwIBS6MCrAGjAosCAgFHsgKsAbIChgICAUWmAlumAmECAUS6AkS6AlUCAUK3AkW3AkoCAUDCAkTCAqIBAgE9vwJFvwJPAgE70QKsAdECuAECATjgAqwB4AK1AwIBNvUCrAH1AosCAgEyhAOsAYQDhgICATD4Alv4AmECAS+MA0SMA1UCAS2JA0WJA0oCASuUA0SUA6IBAgEokQNFkQNPAgEmowOsAaMDuAECASOyA6wBsgO1AwIBIQ==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
