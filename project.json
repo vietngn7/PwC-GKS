@@ -1,0 +1,25 @@
+{
+  "name": "GKS",
+  "description": "Data scraping GKS",
+  "main": "MainFlow.xaml",
+  "dependencies": {
+    "UiPath.UIAutomation.Activities": "[19.1.0]",
+    "UiPath.System.Activities": "[18.4.2]",
+    "UiPath.Excel.Activities": "[2.5.1]"
+  },
+  "schemaVersion": "3.2",
+  "studioVersion": "18.4.1.0",
+  "projectVersion": "1.0.0.0",
+  "runtimeOptions": {
+    "autoDispose": false,
+    "excludedLoggedData": [
+      "Private:*",
+      "*password*"
+    ]
+  },
+  "projectType": "Workflow",
+  "libraryOptions": {
+    "includeOriginalXaml": false,
+    "privateWorkflows": []
+  }
+}
