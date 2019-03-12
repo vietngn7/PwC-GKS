@@ -65,7 +65,6 @@
       <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="На данном шаге исходная таблица с данными дополняется недостающими столбцами до предыдущего месяца. Вся логика завязана строго на том, что таблица начинается с января 2017 года" DisplayName="SetPreprocessDataTable" sap2010:WorkflowViewState.IdRef="Sequence_2">
@@ -106,21 +105,28 @@
       </Assign.Value>
     </Assign>
     <While sap2010:WorkflowViewState.IdRef="While_1" Condition="[index &lt; diffInMonths]">
-      <Sequence DisplayName="SequeInsert columns for further data scrappingnce">
-        <ui:AddDataColumn x:TypeArguments="x:Object" Column="{x:Null}" DefaultValue="{x:Null}" AllowDBNull="True" AutoIncrement="False" ColumnName="[&quot;Month #&quot; + index.ToString()]" DataTable="[dt]" DisplayName="Add Data Column" MaxLength="100" Unique="False" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_2" />
-        <Assign>
+      <Sequence DisplayName="SequeInsert columns for further data scrappingnce" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence.Variables>
+          <Variable x:TypeArguments="x:String" Name="columnName" />
+        </Sequence.Variables>
+        <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
           <Assign.To>
             <OutArgument x:TypeArguments="x:Int64">[index]</OutArgument>
           </Assign.To>
           <Assign.Value>
             <InArgument x:TypeArguments="x:Int64">[index + 1]</InArgument>
           </Assign.Value>
-          <sap2010:WorkflowViewState.IdRef>Assign_4</sap2010:WorkflowViewState.IdRef>
         </Assign>
-        <sap2010:WorkflowViewState.IdRef>Sequence_3</sap2010:WorkflowViewState.IdRef>
+        <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke StTransformIndexToDate workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="StTransformIndexToDate.xaml">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="x:Int64" x:Key="inputIndex">[index]</InArgument>
+            <OutArgument x:TypeArguments="x:String" x:Key="outputDate">[columnName]</OutArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+        <ui:AddDataColumn x:TypeArguments="x:Object" Column="{x:Null}" DefaultValue="{x:Null}" AllowDBNull="True" AutoIncrement="False" ColumnName="[columnName]" DataTable="[dt]" DisplayName="Add Data Column" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_2" MaxLength="100" Unique="False" />
       </Sequence>
     </While>
-    <sads:DebugSymbol.Symbol>dzFFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0UHJlcHJvY2Vzc0RhdGFUYWJsZS54YW1sFkcDfA4CAQFOBVUOAgEfVgVbHQIBGlwFYw4CARZkBWsOAgERbAV6DQIBAlMyU0ACASJQM1BAAgEgWENYcAIBHllAWVICARxWvAFW0gECARteMF4+AgEXaS9pQQIBFGYwZjcCARJtB3kSAgEGbEBsWwIBA24JbsMCAgEMbwl3EgIBB26UAW6+AQIBD27JAW7PAQIBDXQzdD4CAQpxNHE7AgEI</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dzFFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0UHJlcHJvY2Vzc0RhdGFUYWJsZS54YW1sGkYDggEOAgEBTQVUDgIBJVUFWh0CASBbBWIOAgEcYwVqDgIBF2sFgAENAgECUjJSQAIBKE8zT0ACASZXQ1dwAgEkWEBYUgIBIlW8AVXSAQIBIV0wXT4CAR1oL2hBAgEaZTBlNwIBGGwHfxICAQZrQGtbAgEDcAl3EgIBEngJfSECAQx+CX6nAgIBB3UzdT4CARVyNHI7AgETe0h7VAIBEHpGek0CAQ54xwF45AECAQ1+lAF+ogECAQp+rQF+swECAQg=</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -128,17 +134,18 @@
       <sap2010:ViewStateData Id="InvokeWorkflowFile_1" sap:VirtualizedContainerService.HintSize="464,88" />
       <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="464,60" />
       <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="464,60" />
-      <sap2010:ViewStateData Id="AddDataColumn`1_2" sap:VirtualizedContainerService.HintSize="243.2,22.4" />
-      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="243.2,60" />
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="265.6,247.2">
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="314.4,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_2" sap:VirtualizedContainerService.HintSize="314.4,88" />
+      <sap2010:ViewStateData Id="AddDataColumn`1_2" sap:VirtualizedContainerService.HintSize="314.4,22.4" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="336.8,375.2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="While_1" sap:VirtualizedContainerService.HintSize="464,406.4" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="486.4,1019.2">
+      <sap2010:ViewStateData Id="While_1" sap:VirtualizedContainerService.HintSize="464,534.4" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="486.4,1147.2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -146,7 +153,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="SetPreprocessDataTable_1" sap:VirtualizedContainerService.HintSize="526.4,1099.2" />
+      <sap2010:ViewStateData Id="SetPreprocessDataTable_1" sap:VirtualizedContainerService.HintSize="526.4,1227.2" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>
