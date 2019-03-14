@@ -78,13 +78,13 @@
     <If Condition="[ExtractDataTable is Nothing OrElse ExtractDataTable.Rows.Count = 0]" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_7">
-          <ui:LogMessage DisplayName="Log Message" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[&quot;Failed to extract data for response&quot;]" />
+          <ui:LogMessage DisplayName="Log Message" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Fatal" Message="[&quot;Не удалось выгрузить данные с сайта&quot;]" />
           <Assign sap2010:WorkflowViewState.IdRef="Assign_12">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[statusLine]</OutArgument>
             </Assign.To>
             <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[statusLine + "Не удалось извлечь данные со страницы"]</InArgument>
+              <InArgument x:TypeArguments="x:String">[statusLine &amp; "Не удалось извлечь данные со страницы"]</InArgument>
             </Assign.Value>
           </Assign>
         </Sequence>
@@ -205,7 +205,7 @@
               </If.Then>
               <If.Else>
                 <Sequence sap2010:WorkflowViewState.IdRef="Sequence_11">
-                  <ui:LogMessage DisplayName="Log Message" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Error" Message="[&quot;Не достаточно данных для выполнения сверки&quot;]" />
+                  <ui:LogMessage DisplayName="Log Message" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Warn" Message="[&quot;Не достаточно данных для выполнения сверки&quot;]" />
                   <Assign sap2010:WorkflowViewState.IdRef="Assign_18">
                     <Assign.To>
                       <OutArgument x:TypeArguments="x:String">[statusLine]</OutArgument>
@@ -306,7 +306,7 @@
         </Sequence>
       </If.Else>
     </If>
-    <sads:DebugSymbol.Symbol>dyhFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0VXBkYXRlRGF0YS54YW1sVk0DtgIOAgEBTgW0AgoCAQJOE05ZAgEDUAlaFAIBal0JsgIUAgEEUQtRrwECAXBSC1kUAgFrYgtpFAIBZWoLbyMCAV9wC9wBFgIBKt0BC7ECEwIBBVF5UawBAgFxVzZXbAIBblQ3VEMCAWxnNWdBAgFoZDZkPQIBZmxJbFoCAWNtRm1TAgFhasIBatgBAgFgdg2cARgCAVGdAQ2kARYCAUylAQ2sARYCAUitAQ3bARICASveAQ2wAhgCAQfdAUbdAXYCAQZ4EYkBHAIBVpEBFZgBHgIBUqIBN6IBRgIBT58BOJ8BRQIBTaoBOKoBogECAUunATmnAVQCAUmtARutAUcCASyvARHMARwCATXPARHZARwCAS7jAQ+JAhoCARyKAg+fAhQCARKgAg+nAhgCAQ2oAg+vAhgCAQh5E4ABHAIBW4EBE4gBHAIBV5YBQZYBRgIBVZMBQpMBXwIBU7ABE8sBGAIBNtABE9ABvgECATPRARPYARwCAS/lARP2AR4CASH+AReFAiACAR2KAh2KAkkCAROMAhOTAhwCARiWAhOdAhwCARWlAjmlAkQCARCiAjqiAkECAQ6tAjmtAkoCAQuqAjqqAkcCAQl+Pn6dAQIBXns/e1kCAVyGAT+GAUMCAVqDAUCDAV0CAViwASGwAV8CATeyARe8ASICAUG/ARfJASICATrQAYEB0AG7AQIBNNYBPtYBaAIBMtMBP9MBSwIBMOYBFe0BHgIBJu4BFfUBHgIBIoMCQ4MCSAIBIIACRIACYQIBHpECPpECWQIBGo4CP44CbwIBGZsCPpsCQwIBF5gCP5gCbwIBFrMBGbMBvgECAUa0ARm7ASICAULAARnAAcIBAgE/wQEZyAEiAgE76wFA6wGqAQIBKegBQegBXAIBJ/MBQfMBRQIBJfABQvABXwIBI7MBhgGzAbsBAgFHuQFEuQFpAgFFtgFFtgFRAgFDwAGHAcABvwECAUDGAUTGAWwCAT7DAUXDAVECATw=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dyhFOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXFN0VXBkYXRlRGF0YS54YW1sVk0DtgIOAgEBTgW0AgoCAQJOE05ZAgEDUAlaFAIBal0JsgIUAgEEUQtRrwECAXBSC1kUAgFrYgtpFAIBZWoLbyMCAV9wC9wBFgIBKt0BC7ECEwIBBVF5UawBAgFxVzZXcAIBblQ3VEMCAWxnNWdBAgFoZDZkPQIBZmxJbFoCAWNtRm1TAgFhasIBatgBAgFgdg2cARgCAVGdAQ2kARYCAUylAQ2sARYCAUitAQ3bARICASveAQ2wAhgCAQfdAUbdAXYCAQZ4EYkBHAIBVpEBFZgBHgIBUqIBN6IBRgIBT58BOJ8BRQIBTaoBOKoBogECAUunATmnAVQCAUmtARutAUcCASyvARHMARwCATXPARHZARwCAS7jAQ+JAhoCARyKAg+fAhQCARKgAg+nAhgCAQ2oAg+vAhgCAQh5E4ABHAIBW4EBE4gBHAIBV5YBQZYBRgIBVZMBQpMBXwIBU7ABE8sBGAIBNtABE9ABvQECATPRARPYARwCAS/lARP2AR4CASH+AReFAiACAR2KAh2KAkkCAROMAhOTAhwCARiWAhOdAhwCARWlAjmlAkQCARCiAjqiAkECAQ6tAjmtAkoCAQuqAjqqAkcCAQl+Pn6dAQIBXns/e1kCAVyGAT+GAUMCAVqDAUCDAV0CAViwASGwAV8CATeyARe8ASICAUG/ARfJASICATrQAYAB0AG6AQIBNNYBPtYBaAIBMtMBP9MBSwIBMOYBFe0BHgIBJu4BFfUBHgIBIoMCQ4MCSAIBIIACRIACYQIBHpECPpECWQIBGo4CP44CbwIBGZsCPpsCQwIBF5gCP5gCbwIBFrMBGbMBvgECAUa0ARm7ASICAULAARnAAcIBAgE/wQEZyAEiAgE76wFA6wGqAQIBKegBQegBXAIBJ/MBQfMBRQIBJfABQvABXwIBI7MBhgGzAbsBAgFHuQFEuQFpAgFFtgFFtgFRAgFDwAGHAcABvwECAUDGAUTGAWwCAT7DAUXDAVECATw=</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
