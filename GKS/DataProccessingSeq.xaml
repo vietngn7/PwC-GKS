@@ -2,6 +2,7 @@
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
  xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
  xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
  xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
  xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
@@ -69,6 +70,7 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Interop</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="This sequence is to process each row and to invoke specific workflow for that row.&#xA;&#xA;INPUT   : DataTable dt&#xA;OUTPUT: Updated DataTable with updated values&#xA;&#xA;TODO:&#xA;1. Подумать как реализовать проход по всем строкам.&#xA;2. Какие аргументы у workflow&#xA;3. Как обновлять данные в табличке&#xA;&#xA;" DisplayName="DataProccessingSeq" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -113,7 +115,7 @@
             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
           </ActivityAction.Argument>
           <Sequence sap2010:WorkflowViewState.IdRef="Sequence_4">
-            <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <Sequence DisplayName="Обрабатываем таблицу построчно" sap2010:WorkflowViewState.IdRef="Sequence_3">
               <Sequence.Variables>
                 <Variable x:TypeArguments="x:Int32" Name="currentRowIndex" />
               </Sequence.Variables>
@@ -123,44 +125,113 @@
                     <ActivityAction.Argument>
                       <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
                     </ActivityAction.Argument>
-                    <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                    <Sequence DisplayName="Пытаемся выгрузить данные 3 раза" sap2010:WorkflowViewState.IdRef="Sequence_7">
                       <Sequence.Variables>
-                        <Variable x:TypeArguments="sd:DataTable" Default="[new System.Data.DataTable()]" Name="ExtractedData" />
-                        <Variable x:TypeArguments="x:String" Name="currentStatus" />
+                        <Variable x:TypeArguments="x:Boolean" Name="isProcessedCorrectly" />
+                        <Variable x:TypeArguments="x:Int32" Name="processingTry" />
                       </Sequence.Variables>
-                      <If Condition="[InStr(row(1).ToString, &quot;stat&quot;) &gt; 0]" sap2010:WorkflowViewState.IdRef="If_1">
-                        <If.Then>
-                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Вызывается шаг для выгрузки данных с fedstat" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Fedstat.xaml">
-                            <ui:InvokeWorkflowFile.Arguments>
-                              <InOutArgument x:TypeArguments="sd:DataRow" x:Key="row">[row]</InOutArgument>
-                              <InArgument x:TypeArguments="ui:Browser" x:Key="browser">[rbaBrowser]</InArgument>
-                              <OutArgument x:TypeArguments="sd:DataTable" x:Key="ExtractDataTable">[ExtractedData]</OutArgument>
-                              <OutArgument x:TypeArguments="x:String" x:Key="statusLine">[currentStatus]</OutArgument>
-                            </ui:InvokeWorkflowFile.Arguments>
-                          </ui:InvokeWorkflowFile>
-                        </If.Then>
-                        <If.Else>
-                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Вызывается шаг для выгрузки данных с ГКС" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="GKS.xaml">
-                            <ui:InvokeWorkflowFile.Arguments>
-                              <InOutArgument x:TypeArguments="sd:DataRow" x:Key="row">[row]</InOutArgument>
-                              <InArgument x:TypeArguments="ui:Browser" x:Key="browser">[rbaBrowser]</InArgument>
-                              <OutArgument x:TypeArguments="sd:DataTable" x:Key="ExtractDataTable">[ExtractedData]</OutArgument>
-                              <OutArgument x:TypeArguments="x:String" x:Key="statusLine">[currentStatus]</OutArgument>
-                            </ui:InvokeWorkflowFile.Arguments>
-                          </ui:InvokeWorkflowFile>
-                        </If.Else>
-                      </If>
-                      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Обновляем данные в таблице по результатам загрузки" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="StUpdateData.xaml">
-                        <ui:InvokeWorkflowFile.Arguments>
-                          <InArgument x:TypeArguments="sd:DataTable" x:Key="ExtractDataTable">[ExtractedData]</InArgument>
-                          <InArgument x:TypeArguments="x:String" x:Key="beginSearchData">[lastMonthYear]</InArgument>
-                          <InArgument x:TypeArguments="x:Int32" x:Key="beginIndex">[lastIndex]</InArgument>
-                          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="originalDataTable">[dt]</InOutArgument>
-                          <InArgument x:TypeArguments="x:Int32" x:Key="currentRowIndex">[currentRowIndex]</InArgument>
-                          <OutArgument x:TypeArguments="x:String" x:Key="statusLine">[currentStatus]</OutArgument>
-                        </ui:InvokeWorkflowFile.Arguments>
-                      </ui:InvokeWorkflowFile>
-                      <AddToCollection x:TypeArguments="x:String" Collection="[statusList]" DisplayName="Add To Collection" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[currentStatus]" />
+                      <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Boolean">[isProcessedCorrectly]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <Assign sap2010:WorkflowViewState.IdRef="Assign_5">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Int32">[processingTry]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Int32">0</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <While sap2010:WorkflowViewState.IdRef="While_1" Condition="[Not isProcessedCorrectly and (processingTry &lt; 3)]">
+                        <Sequence DisplayName="Пытаемся выгрузить данные с сайта" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                          <TryCatch DisplayName="Try Catch" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                            <TryCatch.Try>
+                              <Sequence DisplayName="Выгружаем данные" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                                <Sequence.Variables>
+                                  <Variable x:TypeArguments="sd:DataTable" Default="[new System.Data.DataTable()]" Name="ExtractedData" />
+                                  <Variable x:TypeArguments="x:String" Name="currentStatus" />
+                                </Sequence.Variables>
+                                <If Condition="[InStr(row(1).ToString, &quot;stat&quot;) &gt; 0]" sap2010:WorkflowViewState.IdRef="If_1">
+                                  <If.Then>
+                                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Вызывается шаг для выгрузки данных с fedstat" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Fedstat.xaml">
+                                      <ui:InvokeWorkflowFile.Arguments>
+                                        <InOutArgument x:TypeArguments="sd:DataRow" x:Key="row">[row]</InOutArgument>
+                                        <InArgument x:TypeArguments="ui:Browser" x:Key="browser">[rbaBrowser]</InArgument>
+                                        <OutArgument x:TypeArguments="sd:DataTable" x:Key="ExtractDataTable">[ExtractedData]</OutArgument>
+                                        <OutArgument x:TypeArguments="x:String" x:Key="statusLine">[currentStatus]</OutArgument>
+                                      </ui:InvokeWorkflowFile.Arguments>
+                                    </ui:InvokeWorkflowFile>
+                                  </If.Then>
+                                  <If.Else>
+                                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Вызывается шаг для выгрузки данных с ГКС" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="GKS.xaml">
+                                      <ui:InvokeWorkflowFile.Arguments>
+                                        <InOutArgument x:TypeArguments="sd:DataRow" x:Key="row">[row]</InOutArgument>
+                                        <InArgument x:TypeArguments="ui:Browser" x:Key="browser">[rbaBrowser]</InArgument>
+                                        <OutArgument x:TypeArguments="sd:DataTable" x:Key="ExtractDataTable">[ExtractedData]</OutArgument>
+                                        <OutArgument x:TypeArguments="x:String" x:Key="statusLine">[currentStatus]</OutArgument>
+                                      </ui:InvokeWorkflowFile.Arguments>
+                                    </ui:InvokeWorkflowFile>
+                                  </If.Else>
+                                </If>
+                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Обновляем данные в таблице по результатам загрузки" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="StUpdateData.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <InArgument x:TypeArguments="sd:DataTable" x:Key="ExtractDataTable">[ExtractedData]</InArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="beginSearchData">[lastMonthYear]</InArgument>
+                                    <InArgument x:TypeArguments="x:Int32" x:Key="beginIndex">[lastIndex]</InArgument>
+                                    <InOutArgument x:TypeArguments="sd:DataTable" x:Key="originalDataTable">[dt]</InOutArgument>
+                                    <InArgument x:TypeArguments="x:Int32" x:Key="currentRowIndex">[currentRowIndex]</InArgument>
+                                    <OutArgument x:TypeArguments="x:String" x:Key="statusLine">[currentStatus]</OutArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                                <AddToCollection x:TypeArguments="x:String" Collection="[statusList]" DisplayName="Add To Collection" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[currentStatus]" />
+                                <Assign sap2010:WorkflowViewState.IdRef="Assign_6">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Boolean">[isProcessedCorrectly]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </Sequence>
+                            </TryCatch.Try>
+                            <TryCatch.Catches>
+                              <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                                <ActivityAction x:TypeArguments="s:Exception">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="Обрабатываем ошибку выгрузки" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                                    <ui:LogMessage DisplayName="Log Message" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[&quot;Для материала &quot; &amp; row(0).ToString &amp; &quot; не удалось выполнить выгрузку. Попытка &quot; &amp; processingTry.ToString &amp; &quot; из 3&quot;]" />
+                                    <Assign sap2010:WorkflowViewState.IdRef="Assign_7">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:Boolean">[isProcessedCorrectly]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <ui:RefreshBrowser Browser="[rbaBrowser]" DisplayName="Refresh Browser" sap2010:WorkflowViewState.IdRef="RefreshBrowser_1" />
+                                  </Sequence>
+                                </ActivityAction>
+                              </Catch>
+                            </TryCatch.Catches>
+                            <TryCatch.Finally>
+                              <Assign sap2010:WorkflowViewState.IdRef="Assign_8">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:Int32">[processingTry]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:Int32">[processingTry + 1]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </TryCatch.Finally>
+                          </TryCatch>
+                        </Sequence>
+                      </While>
                     </Sequence>
                   </ActivityAction>
                 </ui:ForEachRow.Body>
@@ -171,27 +242,41 @@
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
-    <sads:DebugSymbol.Symbol>dy5FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXERhdGFQcm9jY2Vzc2luZ1NlcS54YW1sMUoDrwEOAgEBUAVXDgIBRVgFXw4CAUFgBWcOAgE9aAVsHQIBOW0FrQEWAgECVS9VRQIBSFIwUjsCAUZdMF1SAgFEWjFaQAIBQmU6ZU8CAUBiO2JHAgE+akJqRgIBO2jCAWjeAQIBOm2tAW27AQIBN23AAW3PAQIBNnMLqgEWAgEDdA2oARgCAQWpAQ2pAYYBAgEEeA+nAR8CAQZ4K3g+AgE0eEl4TwIBMn4VpAEgAgEHgAFKgAFpAgEIgwEXmAEcAgEcmQEXogEvAgEOowEXowHMAQIBCYMBJYMBWAIBHYUBG4wBMwIBKI8BG5YBMwIBHp4BY54BZwIBGp8BWZ8BagIBGJsBX5sBbgIBFp0BVJ0BXwIBFJwBWpwBaQIBEqABVqABZQIBEJkB4QGZAfQBAgEPowFOowFcAgEMowG4AaMByQECAQqIAViIAWQCATCHAVeHAVwCAS6JAWSJAXMCASyKAVqKAWkCASqFAd8BhQHtAQIBKZIBWJIBZAIBJpEBV5EBXAIBJJMBZJMBcwIBIpQBWpQBaQIBII8B2wGPAeUBAgEf</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dy5FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXERhdGFQcm9jY2Vzc2luZ1NlcS54YW1sSkwD9gEOAgEBUgVZDgIBZ1oFYQ4CAWNiBWkOAgFfagVuHQIBW28F9AEWAgECVy9XRQIBalQwVDsCAWhfMF9SAgFmXDFcQAIBZGc6Z08CAWJkO2RHAgFgbEJsRgIBXWrCAWreAQIBXG+tAW+7AQIBWW/AAW/PAQIBWHUL8QEWAgEDdg3vARgCAQXwAQ3wAYYBAgEEeg/uAR8CAQZ6K3o+AgFWekl6TwIBVIABFesBIAIBB4UBF4wBIAIBUI0BF5QBIAIBTJUBF+oBHwIBCIoBQ4oBSAIBU4cBRIcBWgIBUZIBQZIBQgIBT48BQo8BUQIBTZYBGekBJAIBDJUBUpUBiQECAQmXARvoASYCAQ2ZAR/HASoCAR3fAR/mASgCARjPASPaAS4CAQ6bAVSbAXMCAR6eASGzASYCATa0ASG9ATkCASi+ASG+AdYBAgEjvwEhxgEqAgEf5AFJ5AFcAgEb4QFK4QFZAgEZ0AEl0AG6AgIBFtEBJdgBLgIBEtkBJdkBogECAQ+eAS+eAWICATegASWnAT0CAUKqASWxAT0CATi5AW25AXECATS6AWO6AXQCATK2AWm2AXgCATC4AV64AWkCAS63AWS3AXMCASy7AWC7AW8CASq0AesBtAH+AQIBKb4BWL4BZgIBJr4BwgG+AdMBAgEkxAFNxAFRAgEiwQFOwQFkAgEg0AGTAdABtwICARfWAVHWAVYCARXTAVLTAWgCARPZAUDZAU4CARCjAWKjAW4CAUqiAWGiAWYCAUikAW6kAX0CAUalAWSlAXMCAUSgAekBoAH3AQIBQ60BYq0BbgIBQKwBYawBZgIBPq4Bbq4BfQIBPK8BZK8BcwIBOqoB5QGqAe8BAgE5</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="765.6,60" />
-      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="765.6,60" />
-      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="765.6,60" />
-      <sap2010:ViewStateData Id="InvokeWorkflowFile_4" sap:VirtualizedContainerService.HintSize="765.6,88" />
+      <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="577.6,60" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="577.6,60" />
+      <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="577.6,60" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_4" sap:VirtualizedContainerService.HintSize="577.6,88" />
+      <sap2010:ViewStateData Id="Assign_4" sap:VirtualizedContainerService.HintSize="465.6,60" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="465.6,60" />
       <sap2010:ViewStateData Id="InvokeWorkflowFile_1" sap:VirtualizedContainerService.HintSize="314.4,88" />
       <sap2010:ViewStateData Id="InvokeWorkflowFile_2" sap:VirtualizedContainerService.HintSize="314.4,88" />
       <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="653.6,237.6" />
       <sap2010:ViewStateData Id="InvokeWorkflowFile_3" sap:VirtualizedContainerService.HintSize="653.6,88" />
       <sap2010:ViewStateData Id="AddToCollection`1_1" sap:VirtualizedContainerService.HintSize="653.6,22.4" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="676,552.8">
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="653.6,60" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="200,52.8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LogMessage_1" sap:VirtualizedContainerService.HintSize="314.4,92.8" />
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="314.4,60" />
+      <sap2010:ViewStateData Id="RefreshBrowser_1" sap:VirtualizedContainerService.HintSize="314.4,22.4" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="336.8,380">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ForEachRow_1" sap:VirtualizedContainerService.HintSize="706.4,701.6">
+      <sap2010:ViewStateData Id="Catch`1_1" sap:VirtualizedContainerService.HintSize="403.2,450.4">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -199,23 +284,48 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="728.8,826.4">
+      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="243.2,60" />
+      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="417.6,823.2" />
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="440,948">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="CloseTab_1" sap:VirtualizedContainerService.HintSize="728.8,22.4" />
-      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="751.2,1013.6">
+      <sap2010:ViewStateData Id="While_1" sap:VirtualizedContainerService.HintSize="465.6,1107.2" />
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="488,1432">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="OpenBrowser_1" sap:VirtualizedContainerService.HintSize="765.6,1113.6" />
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="788,1854.4">
+      <sap2010:ViewStateData Id="ForEachRow_1" sap:VirtualizedContainerService.HintSize="518.4,1580.8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="540.8,1705.6">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="CloseTab_1" sap:VirtualizedContainerService.HintSize="540.8,22.4" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="563.2,1892.8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="OpenBrowser_1" sap:VirtualizedContainerService.HintSize="577.6,1992.8" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="600,2733.6">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -223,7 +333,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="DataProccessingSeq_1" sap:VirtualizedContainerService.HintSize="828,1934.4">
+      <sap2010:ViewStateData Id="DataProccessingSeq_1" sap:VirtualizedContainerService.HintSize="640,2813.6">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
