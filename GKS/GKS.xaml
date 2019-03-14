@@ -70,6 +70,7 @@
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence sap2010:Annotation.AnnotationText="A sequence is to process data from an inputed row. It enters values to website GKS by using javascript code.&#xA;&#xA;INPUT   : DataRow row&#xA;OUTPUT: Unknown yet&#xA;&#xA;TODO: &#xA;1. Убрать message box в браузере&#xA;2. Вытащить данные из таблички&#xA;3. Подумать над аргументами flow&#xA;4. Как данные обновлять???&#xA;&#xA;&#xA;Steps:&#xA;1. Determine which of two websites of the GKS is to open. &#xA;2. Assign a value to miss according to type of GKS.&#xA;3. Open a brower and input all data from the row.&#xA;   1) A &quot;currentIndex&quot; variable is created to retrieve value from the row.&#xA;   2) Loop through 6 values of row (miss one of them according to type of GKS) and then input to the website using JS code.&#xA;  3) Click &quot;Select all years&quot;&#xA;  4) Click a button to show results.&#xA;4. Somehow switch table and retrieve results.&#xA;&#xA;" DisplayName="GKS" sap2010:WorkflowViewState.IdRef="Sequence_4">
@@ -204,7 +205,7 @@
                                   </Assign.Value>
                                 </Assign>
                               </Switch>
-                              <ui:InjectJsScript ScriptOutput="{x:Null}" DisplayName="Inject Js Script" sap2010:WorkflowViewState.IdRef="InjectJsScript_3" InputParameter="[param + &quot;|&quot;+ row(currentIndex + 2).ToString]" ScriptCode="function(e, s) {&#xD;&#xA;   var params = s.split('|');&#xD;&#xA;   var selector = document.getElementsByName(params[0])[0];&#xD;&#xA;   var options = selector.options;&#xD;&#xA;   for (var i = 0; i &lt; options.length; ++i) {&#xD;&#xA;        if (options[i].value == params[1]) {&#xD;&#xA;            selector.selectedIndex = i;&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;}">
+                              <ui:InjectJsScript ScriptOutput="{x:Null}" DisplayName="Inject Js Script" sap2010:WorkflowViewState.IdRef="InjectJsScript_3" InputParameter="[param + &quot;|&quot;+ row(currentIndex + 2).ToString]" ScriptCode="function(e, s) {&#xA;   var params = s.split('|');&#xA;   var selector = document.getElementsByName(params[0])[0];&#xA;   var options = selector.options;&#xA;   for (var i = 0; i &lt; options.length; ++i) {&#xA;        if (options[i].value == params[1]) {&#xA;            selector.selectedIndex = i;&#xA;    }&#xA;}&#xA;}">
                                 <ui:InjectJsScript.Target>
                                   <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" WaitForReady="COMPLETE" />
                                 </ui:InjectJsScript.Target>
@@ -306,22 +307,36 @@
                             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
                           </ActivityAction.Argument>
                           <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_19">
-                            <ui:ExtractData NextLinkSelector="{x:Null}" ContinueOnError="True" DataTable="[ExtractDataTable]" DelayBetweenPagesMS="300" DisplayName="Extract Structured Data 'TBODY'" ExtractMetadata="&lt;extract&gt;&lt;column exact='1' name='Column1' attr='text'&gt;&lt;webctrl tag='tr' idx='3'/&gt;&lt;webctrl tag='td'/&gt;&lt;/column&gt;&lt;/extract&gt;" sap2010:WorkflowViewState.IdRef="ExtractData_2" MaxNumberOfResults="100">
-                              <ui:ExtractData.Target>
-                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="6e04f2d34caca85d67c1af2d59214cd7" Selector="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;font&amp;gt;table&amp;gt;tbody' tag='TBODY' /&gt;" WaitForReady="COMPLETE" />
-                              </ui:ExtractData.Target>
-                            </ui:ExtractData>
-                            <ui:CommentOut DisplayName="Comment Out" sap2010:WorkflowViewState.IdRef="CommentOut_1">
-                              <ui:CommentOut.Body>
-                                <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_22">
-                                  <ui:InvokeCode ContinueOnError="{x:Null}" Code="dt.Rows.RemoveAt(0)&#xA;dt.Rows.RemoveAt(1)" DisplayName="Invoke Code" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
-                                    <ui:InvokeCode.Arguments>
-                                      <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dt">[ExtractDataTable]</InOutArgument>
-                                    </ui:InvokeCode.Arguments>
-                                  </ui:InvokeCode>
-                                </Sequence>
-                              </ui:CommentOut.Body>
-                            </ui:CommentOut>
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="x:Boolean" Name="tbodyExists" />
+                            </Sequence.Variables>
+                            <ui:UiElementExists DisplayName="Element Exists" Exists="[tbodyExists]">
+                              <ui:UiElementExists.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;font&amp;gt;table&amp;gt;tbody' tag='TBODY' /&gt;" TimeoutMS="3000" WaitForReady="INTERACTIVE" />
+                              </ui:UiElementExists.Target>
+                              <sap2010:WorkflowViewState.IdRef>UiElementExists_2</sap2010:WorkflowViewState.IdRef>
+                            </ui:UiElementExists>
+                            <If Condition="[tbodyExists]">
+                              <If.Then>
+                                <ui:ExtractData NextLinkSelector="{x:Null}" ContinueOnError="True" DataTable="[ExtractDataTable]" DelayBetweenPagesMS="300" DisplayName="Extract Structured Data 'TBODY'" ExtractMetadata="&lt;extract&gt;&lt;column exact='1' name='Column1' attr='text'&gt;&lt;webctrl tag='tr' idx='3'/&gt;&lt;webctrl tag='td'/&gt;&lt;/column&gt;&lt;/extract&gt;" sap2010:WorkflowViewState.IdRef="ExtractData_2" MaxNumberOfResults="100">
+                                  <ui:ExtractData.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="6e04f2d34caca85d67c1af2d59214cd7" Selector="&lt;webctrl css-selector='body&amp;gt;div&amp;gt;font&amp;gt;table&amp;gt;tbody' tag='TBODY' /&gt;" WaitForReady="COMPLETE" />
+                                  </ui:ExtractData.Target>
+                                </ui:ExtractData>
+                              </If.Then>
+                              <If.Else>
+                                <Assign>
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="sd:DataTable">[ExtractDataTable]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="sd:DataTable">[Nothing]</InArgument>
+                                  </Assign.Value>
+                                  <sap2010:WorkflowViewState.IdRef>Assign_33</sap2010:WorkflowViewState.IdRef>
+                                </Assign>
+                              </If.Else>
+                              <sap2010:WorkflowViewState.IdRef>If_6</sap2010:WorkflowViewState.IdRef>
+                            </If>
                             <ui:CloseTab Browser="{x:Null}" DisplayName="Close Tab" sap2010:WorkflowViewState.IdRef="CloseTab_2" />
                           </Sequence>
                         </ActivityAction>
@@ -348,7 +363,7 @@
         </ActivityAction>
       </ui:BrowserScope.Body>
     </ui:BrowserScope>
-    <sads:DebugSymbol.Symbol>dx9FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXEdLUy54YW1sXUsD4AIOAgEBTzVPPAIBAlEFWA4CAXNZBW4KAgFnbwXeAhcCAQNWMFZBAgF2UzFTNgIBdFkTWUsCAWhbCWISAgFvZQlsEgIBa29zb34CAWV1C9sCFgIBBGAzYDQCAXJdNF08AgFwajNqNAIBbmc0ZzwCAWx2DXaGAQIBYncNeyICAV18DdoCEgIBBXZ8doMBAgFjeYsBebACAgFhebsCecECAgFgd0t3YQIBXnwbfDECAQZ+EcsCHAIBD84CEdgCHAIBCIIBE6wCHgIBHq0CE8oCHgIBEM8CE88CqwECAQ3QAhPXAhwCAQmIARWPAR4CAVmQARXgAR0CASnhARXvASACASfwARX+ASACASX/ARWNAiACASOOAhWcAiACASGdAhWrAiACAR+uAhXJAicCARHPAoEBzwKoAQIBDtUCPtUCVQIBDNICP9ICSwIBCo0BP40BQAIBXIoBQIoBTgIBWpEBF98BIgIBLJABdpABjQECASrtAagB7QGzAgIBKPwBqAH8AcICAgEmiwKoAYsCwAICASSaAqgBmgK+AgIBIqkCqAGpArACAgEgrgKsAq4C9gICAR20AhvGAiYCARKSARnWAR4CATLXARneASICAS21Ah25Ai4CARW6Ah3EAi0CARTFAh3FAoQBAgETkgEnkgFAAgEzlAEd1AEoAgE23AFD3AFVAgEw2QFE2QFSAgEutQK4A7UCvQMCARy3ArABtwKUAgIBG7UCkwG1ApgBAgEatQJZtQJfAgEZtQJqtQJ+AgEXtQLXAbUC9AICARaVAR/OASgCATrPAR/TATMCATeVAasClQG7AgIBO5YBIZ0BKgIBVZ4BIaUBKgIBUaYBIa0BKgIBTa4BIbUBKgIBSbYBIb0BKgIBRb4BIcUBKgIBQcYBIc0BKgIBPc8B8AHPAeAEAgE5zwGrAc8B5AECATibAUybAVECAViYAU2YAVQCAVajAUyjAVECAVSgAU2gAVQCAVKrAUyrAVACAVCoAU2oAVQCAU6zAUyzAVUCAUywAU2wAVQCAUq7AUy7AU8CAUi4AU24AVQCAUbDAUzDAVICAUTAAU3AAVQCAULLAUzLAVICAUDIAU3IAVQCAT4=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dx9FOlxEZXZcUHdDXFB3Qy1HS1NcR0tTXEdLUy54YW1sZUwD7wIOAgEBUDVQPAIBAlIFWQ4CAX5aBW8KAgFycAXtAhcCAQNXMFdBAwGBAVQxVDYCAX9aE1pLAgFzXAljEgIBemYJbRICAXZwc3B+AgFwdgvqAhYCAQRhM2E0AgF9XjRePAIBe2szazQCAXloNGg8AgF3dw13hgECAW14DXwiAgFofQ3pAhICAQV3fHeDAQIBbnqLAXqwAgIBbHq7AnrBAgIBa3hLeGECAWl9G30xAgEGfxHaAhwCAQ/dAhHnAhwCAQiDAROtAh4CASmuAhPZAh4CARDeAhPeAqsBAgEN3wIT5gIcAgEJiQEVkAEeAgFkkQEV4QEdAgE04gEV8AEgAgEy8QEV/wEgAgEwgAIVjgIgAgEujwIVnQIgAgEsngIVrAIgAgEqrwIV2AInAgER3gKBAd4CqAECAQ7kAj7kAlUCAQzhAj/hAksCAQqOAT+OAUACAWeLAUCLAU4CAWWSARfgASICATeRAXaRAY0BAgE17gGoAe4BswICATP9AagB/QHCAgIBMYwCqAGMAsACAgEvmwKoAZsCvgICAS2qAqgBqgKwAgIBK68CrAKvAvYCAgEotQIb1QImAgESkwEZ1wEeAgE92AEZ3wEiAgE4uQIdvgIyAgEjvwId0wIiAgEU1AId1AKEAQIBE5MBJ5MBQAIBPpUBHdUBKAIBQd0BQ90BVQIBO9oBRNoBUgIBObsCYrsCxgECASe7AtEBuwLXAQIBJrkCVbkCZAIBJL8CK78COgIBFcECIcUCMgIBG8gCIdACKgIBF5YBH88BKAIBRdABH9QBMwIBQsECvAPBAsEDAgEiwwK0AcMCmAICASHBApcBwQKcAQIBIMECXcECYwIBH8ECbsECggECAR3BAtsBwQL4AgIBHM0CUM0CWQIBGsoCUcoCYwIBGJYBqwKWAbsCAgFGlwEhngEqAgFgnwEhpgEqAgFcpwEhrgEqAgFYrwEhtgEqAgFUtwEhvgEqAgFQvwEhxgEqAgFMxwEhzgEqAgFI0AHwAdABswQCAUTQAasB0AHkAQIBQ5wBTJwBUQIBY5kBTZkBVAIBYaQBTKQBUQIBX6EBTaEBVAIBXawBTKwBUAIBW6kBTakBVAIBWbQBTLQBVQIBV7EBTbEBVAIBVbwBTLwBTwIBU7kBTbkBVAIBUcQBTMQBUgIBT8EBTcEBVAIBTcwBTMwBUgIBS8kBTckBVAIBSQ==</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -464,26 +479,20 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ExtractData_2" sap:VirtualizedContainerService.HintSize="416,107.2" />
-      <sap2010:ViewStateData Id="InvokeCode_1" sap:VirtualizedContainerService.HintSize="314.4,164.8" />
-      <sap2010:ViewStateData Id="Sequence_22" sap:VirtualizedContainerService.HintSize="336.8,289.6">
+      <sap2010:ViewStateData Id="UiElementExists_2" sap:VirtualizedContainerService.HintSize="582.4,68.8" />
+      <sap2010:ViewStateData Id="ExtractData_2" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Assign_33" sap:VirtualizedContainerService.HintSize="243.2,60" />
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="582.4,256.8" />
+      <sap2010:ViewStateData Id="CloseTab_2" sap:VirtualizedContainerService.HintSize="582.4,22.4" />
+      <sap2010:ViewStateData Id="Sequence_19" sap:VirtualizedContainerService.HintSize="604.8,552.8">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="CommentOut_1" sap:VirtualizedContainerService.HintSize="416,368" />
-      <sap2010:ViewStateData Id="CloseTab_2" sap:VirtualizedContainerService.HintSize="416,22.4" />
-      <sap2010:ViewStateData Id="Sequence_19" sap:VirtualizedContainerService.HintSize="438.4,702.4">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="BrowserScope_3" sap:VirtualizedContainerService.HintSize="452.8,849.6" />
-      <sap2010:ViewStateData Id="Sequence_20" sap:VirtualizedContainerService.HintSize="695.2,974.4">
+      <sap2010:ViewStateData Id="BrowserScope_3" sap:VirtualizedContainerService.HintSize="619.2,700" />
+      <sap2010:ViewStateData Id="Sequence_20" sap:VirtualizedContainerService.HintSize="695.2,824.8">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -491,7 +500,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_21" sap:VirtualizedContainerService.HintSize="717.6,4148">
+      <sap2010:ViewStateData Id="Sequence_21" sap:VirtualizedContainerService.HintSize="717.6,3998.4">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -508,16 +517,16 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="1079.2,4297.6" />
-      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="1101.6,4669.6">
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="1079.2,4148" />
+      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="1101.6,4520">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="BrowserScope_2" sap:VirtualizedContainerService.HintSize="1116,4816.8" />
-      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="1138.4,5671.2">
+      <sap2010:ViewStateData Id="BrowserScope_2" sap:VirtualizedContainerService.HintSize="1116,4667.2" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="1138.4,5521.6">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -525,7 +534,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="GKS_059_1" sap:VirtualizedContainerService.HintSize="1178.4,5751.2">
+      <sap2010:ViewStateData Id="GKS_059_1" sap:VirtualizedContainerService.HintSize="1178.4,5601.6">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
